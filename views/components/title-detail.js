@@ -83,8 +83,8 @@ export default function(model, actions) {
                         return m("tr", {key: row.id}, [
                           t.tipo == "TELEFILM" ? m("td", row.stagione ? row.stagione : "") : null,
                           t.tipo == "TELEFILM" ? m("td", row.episodio ? row.episodio : "") : null,
-                          m("td", row.personaggio ? row.personaggio.toLowerCase() : ""),
-                          m("td",
+                          m("td", {style: "vertical-align:middle;"}, row.personaggio ? row.personaggio.toLowerCase() : ""),
+                          m("td", {style: "vertical-align:middle;"},
                             m("figure.image.is-64x64",
                               m("img.is-rounded", {
                                 style: "object-fit:cover; border-radius:50%; width:64px; height:64px",
@@ -93,7 +93,7 @@ export default function(model, actions) {
                               })
                             )
                           ),
-                          m("td", [
+                          m("td", {style: "vertical-align:middle;"}, [
                             m("a", {
                                 href: '/titlenotes/' + row.id + '/' + row.attore,
                                 oncreate: m.route.link
@@ -101,7 +101,7 @@ export default function(model, actions) {
                               row.attore
                             )
                           ]),
-                          m("td", [
+                          m("td", {style: "vertical-align:middle;"}, [
                             row.dubber ? m("a", {
                                 href: '/dubber/' + row.dubber.id,
                                 oncreate: m.route.link
@@ -109,7 +109,7 @@ export default function(model, actions) {
                               row.dubber.nome + " " + row.dubber.cognome
                             ) : row.doppiatore
                           ]),
-                          m("td", [
+                          m("td", {style: "vertical-align:middle;"}, [
                             m("a.is-small", {
                                 onclick: function() {
                                   return actions.editTitlenote(row);
@@ -133,7 +133,7 @@ export default function(model, actions) {
                       }),
 
                       m("tr", {key: '0'}, [
-                        t.tipo == "TELEFILM" ? m("td",
+                        t.tipo == "TELEFILM" ? m("td", {style: "vertical-align:middle;"},
                           m(".field",
                             m(".control",
                               m("input.input.is-small[placeholder='Stagione'][type='number'][min='1'][max='15']", {
@@ -143,7 +143,7 @@ export default function(model, actions) {
                             )
                           )
                         ) : null,
-                        t.tipo == "TELEFILM" ? m("td",
+                        t.tipo == "TELEFILM" ? m("td", {style: "vertical-align:middle;"},
                           m(".field",
                             m(".control",
                               m("input.input.is-small[placeholder='Episodio'][type='number'][min='1'][max='15']", {
@@ -153,7 +153,7 @@ export default function(model, actions) {
                             )
                           )
                         ) : null,
-                        m("td",
+                        m("td", {style: "vertical-align:middle;"},
                           m(".field",
                             m(".control",
                               m("input.input.is-small[placeholder='Personaggio'][type='text']", {
@@ -163,28 +163,43 @@ export default function(model, actions) {
                             )
                           )
                         ),
-                        m("td",
-                          m(".field",
-                            m(".file.is-small",
-                              m("label.file-label",
-                                [
-                                  m("input.file-input[name='mediafile'][type='file']", {onchange: actions.uploadTitlenoteImage}),
-                                  m("span.file-cta",
-                                    [
-                                      m("span.file-icon",
-                                        m("i.fas.fa-upload")
-                                      ),
-                                      m("span.file-label",
-                                        "Immagine personaggio..."
-                                      )
-                                    ]
+                        m("td", {style: "vertical-align:middle;"},
+                          m("nav.level",
+                            m(".level-left", [
+                              m(".level-item",
+                                m("figure.image.is-64x64",
+                                  m("img.is-rounded", {
+                                      style: "object-fit:cover; border-radius:50%; width:64px; height:64px",
+                                      src: model.titlenoteedit.fotop ? model.mediaOptions.url + model.titlenoteedit.fotop : placeholderM
+                                    }
                                   )
-                                ]
+                                )
+                              ),
+                              m(".level-item",
+                                m(".field",
+                                  m(".file.is-small",
+                                    m("label.file-label",
+                                      [
+                                        m("input.file-input[name='mediafile'][type='file']", {onchange: actions.uploadTitlenoteImage}),
+                                        m("span.file-cta",
+                                          [
+                                            m("span.file-icon",
+                                              m("i.fas.fa-upload")
+                                            ),
+                                            m("span.file-label",
+                                              "Image..."
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  )
+                                )
                               )
-                            )
+                            ])
                           )
                         ),
-                        m("td",
+                        m("td", {style: "vertical-align:middle;"},
                           m(".field",
                             m(".control",
                               m("input.input.is-small[placeholder='Attore'][type='text']", {
@@ -194,7 +209,7 @@ export default function(model, actions) {
                             )
                           )
                         ),
-                        m("td",
+                        m("td", {style: "vertical-align:middle;"},
                           m(".field",
                             m(".control",
                               m("input.input.is-small[placeholder='Doppiatore'][type='text']", {
@@ -205,7 +220,7 @@ export default function(model, actions) {
                             )
                           )
                         ),
-                        m("td", [
+                        m("td", {style: "vertical-align:middle;"}, [
                           m("a.button.is-small", {
                             onclick: actions.submitUpdateTitlenote,
                             disabled: !this.canSubmitTitlenote(),
