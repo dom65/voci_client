@@ -12,6 +12,7 @@ function createModel(s) {
 
     mediaOptions: {url: '/'},
 
+    backHistoryLevel: -1,
     loading: false,
     mainMenuToggle: false,
 

@@ -13,7 +13,7 @@ export default function(model, actions) {
             m(".media-left",
               m("a.button[]", {
                 onclick: function() {
-                  history.back()
+                  history.go(model.backHistoryLevel);
                 }
               }, [
                 m("span.has-text-grey-light", [

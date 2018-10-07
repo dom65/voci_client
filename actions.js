@@ -32,6 +32,11 @@ function createActions(sets, mdl, api) {
     clearSearchTitle: clearSearchTitle,
 
     title: title,
+    editTitlenote: editTitlenote,
+    changeTitlenoteDubber: changeTitlenoteDubber,
+    submitUpdateTitlenote: submitUpdateTitlenote,
+    submitDeleteTitlenote: submitDeleteTitlenote,
+    uploadTitlenoteImage: uploadTitlenoteImage,
 
     toggleMainMenu: toggleMainMenu,
 
@@ -39,6 +44,15 @@ function createActions(sets, mdl, api) {
 
   function onNavigateTo(routeName, params, route) {
     console.log("onNavigateTo: " + route);
+    console.log("last route: " + m.route.get());
+
+    if (m.route.get() && (m.route.get().indexOf("/dubberedit/") >=0 || m.route.get().indexOf("/dubbernoteedit/") >=0)) {
+      model.backHistoryLevel = model.backHistoryLevel-2;
+    } else if (route == m.route.get()) {
+      model.backHistoryLevel--;
+    } else {
+      model.backHistoryLevel = -1;
+    }
 
     if (!model.login.token) {
       model.loading = false;
@@ -96,6 +110,7 @@ function createActions(sets, mdl, api) {
       return dubbernoteedit(params.id)
     } else if (routeName == "title") {
       model.mainMenuToggle = false;
+      model.titlenoteedit = {};
       return title(params.id)
     } else if (routeName == "titlenotes") {
       model.mainMenuToggle = false;
@@ -410,6 +425,103 @@ function createActions(sets, mdl, api) {
         model.loading = false;
       })
   }
+
+  function editTitlenote(titlenote) {
+    console.log("Edit Titlenote: " + titlenote);
+    model.titlenoteedit.id = titlenote.id;
+    model.titlenoteedit.stagione = titlenote.stagione;
+    model.titlenoteedit.episodio = titlenote.episodio;
+    model.titlenoteedit.personaggio = titlenote.personaggio;
+    model.titlenoteedit.fotop = titlenote.fotop;
+    model.titlenoteedit.attore = titlenote.attore;
+    model.titlenoteedit.doppiatore = titlenote.doppiatore;
+  }
+
+  function changeTitlenoteDubber(doppiatore) {
+    model.loading = true;
+    m.redraw();
+    return dataApi.findDubber(doppiatore)
+      .then(function(res) {
+        if (!res.errors) {
+          console.log(res);
+        }
+        model.loading = false;
+        model.titlenoteedit.id_dubber = res.data.dubbers[0].id
+        model.titlenoteedit.doppiatore = res.data.dubbers[0].nome + ' ' + res.data.dubbers[0].cognome;
+      })
+      .catch(function(err) {
+        console.error(err);
+        model.loading = false;
+        model.titlenoteedit.id_dubber = null;
+      })
+  }
+
+  function submitUpdateTitlenote(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    model.loading = true;
+    m.redraw();
+    return dataApi.updateTitlenote(model.title.id, model.titlenoteedit, model.login.id)
+      .then(function(res) {
+        if (!res.errors) {
+          console.log(res);
+        }
+        model.loading = false;
+        m.route.set("/title/" + model.title.id);
+      })
+      .catch(function(err) {
+        console.error(err);
+        model.loading = false;
+        model.titlenoteedit = {};
+      })
+  }
+
+  function submitDeleteTitlenote(id) {
+    model.loading = true;
+    m.redraw();
+    return dataApi.deleteTitlenote(id)
+      .then(function(res) {
+        if (!res.errors) {
+          console.log(res);
+        }
+        model.loading = false;
+        m.route.set("/title/" + model.title.id);
+      })
+      .catch(function(err) {
+        console.error(err);
+        model.loading = false;
+      })
+  }
+
+  function uploadTitlenoteImage(e) {
+    if (e) {
+      e.preventDefault();
+    } else {
+      return;
+    }
+    var file = e.target.files[0]
+
+    var data = new FormData()
+    data.append("mediafile", file)
+
+    model.loading = true;
+    m.redraw();
+
+    return dataApi.uploadTitlenoteImage(data)
+      .then(function(res) {
+        if (!res.error) {
+          console.log(res);
+        }
+        model.loading = false;
+        model.titlenoteedit.fotop = res.destination;
+      })
+      .catch(function(err) {
+        console.error(err);
+        model.loading = false;
+      })
+  }
+
 
   function toggleMainMenu() {
     model.mainMenuToggle = !model.mainMenuToggle;

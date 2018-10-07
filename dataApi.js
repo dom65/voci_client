@@ -14,6 +14,7 @@ function createDataApi(s) {
     login: login,
     dubbers: dubbers,
     dubber: dubber,
+    findDubber: findDubber,
     updateDubber: updateDubber,
     updateDubberNote: updateDubberNote,
     uploadDubberImage: uploadDubberImage,
@@ -23,6 +24,9 @@ function createDataApi(s) {
     title: title,
 
     titlenote: titlenote,
+    updateTitlenote: updateTitlenote,
+    deleteTitlenote: deleteTitlenote,
+    uploadTitlenoteImage: uploadTitlenoteImage,
 
     casts: casts,
     cast: cast,
@@ -49,6 +53,12 @@ function createDataApi(s) {
   function dubber(id) {
     return client.post(settings.graphql_queries.dubber, {
       "id": id,
+    });
+  }
+
+  function findDubber(deno) {
+    return client.post(settings.graphql_queries.dubbers, {
+      "deno": deno,
     });
   }
 
@@ -145,6 +155,51 @@ function createDataApi(s) {
     return client.post(settings.graphql_queries.titlenote, {
       "id": id,
     });
+  }
+
+  function updateTitlenote(id_title, titlenote, id_user) {
+    console.log("DataApi: updateTitlenote " + titlenote);
+
+    if (titlenote.id && titlenote.id != '0') {
+      return client.post(settings.graphql_mutations.updateTitlenote, {
+        "id": titlenote.id,
+        "stagione": titlenote.stagione,
+        "episodio": titlenote.episodio,
+        "personaggio": titlenote.personaggio,
+        "fotop": titlenote.fotop,
+        "attore": titlenote.attore,
+        "doppiatore": titlenote.doppiatore,
+        "id_dubber": titlenote.id_dubber,
+        "id_title": id_title,
+        "id_user": id_user,
+      });
+    } else {
+      return client.post(settings.graphql_mutations.createTitlenote, {
+        "stagione": titlenote.stagione,
+        "episodio": titlenote.episodio,
+        "personaggio": titlenote.personaggio,
+        "fotop": titlenote.fotop,
+        "attore": titlenote.attore,
+        "doppiatore": titlenote.doppiatore,
+        "id_dubber": titlenote.id_dubber,
+        "id_title": id_title,
+        "id_user": id_user,
+      });
+    }
+  }
+
+  function deleteTitlenote(id) {
+    return client.post(settings.graphql_mutations.deleteTitlenote, {
+      "id": id,
+    });
+  }
+
+  function uploadTitlenoteImage(data) {
+    return m.request({
+      method: "POST",
+      url: "mediaupload",
+      data: data,
+    })
   }
 
   function casts(attore) {

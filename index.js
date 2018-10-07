@@ -80,7 +80,7 @@ var settings = {
           }\
         }\
         titlenotes{\
-          id, stagione, episodio, personaggio, foto, attore, doppiatore, dubber {\
+          id, stagione, episodio, personaggio, fotop, attore, doppiatore, dubber {\
             id, nome, cognome, sesso, telefono, foto,\
           }\
         }\
@@ -129,6 +129,21 @@ var settings = {
 
     updateDubbernote: 'mutation($id: ID!, $voce: String, $ruolo: String, $etavoce: String, $cartoni: Int, $canta: Int, $piuvoci: Int, $teatro: Int, $sync: Int, $giudizio: Int, $note: String, $id_dubber: ID!, $id_user: ID!) {\
       updateDubbernote(id: $id, input: {voce: $voce, ruolo: $ruolo, etavoce: $etavoce, cartoni: $cartoni, canta: $canta, piuvoci: $piuvoci, teatro: $teatro, sync: $sync, giudizio: $giudizio, note: $note, id_dubber: $id_dubber, id_user: $id_user})\
+    }',
+
+
+    createTitlenote: 'mutation($stagione: Int, $episodio: Int, $personaggio: String, $fotop: String, $attore: String, $doppiatore: String, $id_dubber: ID, $id_title: ID!, $id_user: ID!) {\
+      createTitlenote(input: {stagione: $stagione, episodio: $episodio, personaggio: $personaggio, fotop: $fotop, attore: $attore, doppiatore: $doppiatore, id_dubber: $id_dubber, id_title: $id_title, id_user: $id_user}) {\
+        id\
+      }\
+    }',
+
+    updateTitlenote: 'mutation($id: ID!, $stagione: Int, $episodio: Int, $personaggio: String, $fotop: String, $attore: String, $doppiatore: String, $id_dubber: ID, $id_title: ID!, $id_user: ID!) {\
+      updateTitlenote(id: $id, input: {stagione: $stagione, episodio: $episodio, personaggio: $personaggio, fotop: $fotop, attore: $attore, doppiatore: $doppiatore, id_dubber: $id_dubber, id_title: $id_title, id_user: $id_user})\
+    }',
+
+    deleteTitlenote: 'mutation($id: ID!) {\
+      deleteTitlenote(id: $id)\
     }',
 
   },

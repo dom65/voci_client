@@ -12,7 +12,7 @@ export default function(model, actions) {
           m(".media-left",
 
           m("a.button[]", {
-            onclick: function() {history.back()}
+            onclick: function() {history.go(model.backHistoryLevel);}
             //href: '/dubbers',
             //oncreate: m.route.link
           }, [
