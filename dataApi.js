@@ -12,6 +12,7 @@ function createDataApi(s) {
 
   return {
     login: login,
+
     dubbers: dubbers,
     dubber: dubber,
     findDubber: findDubber,
@@ -22,6 +23,7 @@ function createDataApi(s) {
 
     titles: titles,
     title: title,
+    updateTitle: updateTitle,
 
     titlenote: titlenote,
     updateTitlenote: updateTitlenote,
@@ -64,22 +66,72 @@ function createDataApi(s) {
 
   function updateDubber(dubber) {
     console.log("DataApi: updateDubber " + dubber.id);
-    return client.post(settings.graphql_mutations.updateDubber, {
-      "id": dubber.id,
-      "nome": dubber.nome,
-      "cognome": dubber.cognome,
-      "sesso": dubber.sesso,
-      "telefono": dubber.telefono,
-      "anno": dubber.anno,
-      "luogo": dubber.luogo,
-      "note": dubber.note,
-      "email": dubber.email,
-      "madrelingua": dubber.madrelingua,
-      "accentistranieri": dubber.accentistranieri,
-      "accentiregionali": dubber.accentiregionali,
-      "foto": dubber.foto,
-      "audio": dubber.audio,
-    });
+
+    if (dubber.id) {
+      return client.post(settings.graphql_mutations.updateDubber, {
+        "id": dubber.id,
+        "nome": dubber.nome,
+        "cognome": dubber.cognome,
+        "sesso": dubber.sesso,
+        "telefono": dubber.telefono,
+        "anno": dubber.anno,
+        "luogo": dubber.luogo,
+        "note": dubber.note,
+        "email": dubber.email,
+        "madrelingua": dubber.madrelingua,
+        "accentistranieri": dubber.accentistranieri,
+        "accentiregionali": dubber.accentiregionali,
+        "foto": dubber.foto,
+        "audio": dubber.audio,
+      });
+    } else {
+      return client.post(settings.graphql_mutations.createDubber, {
+        "nome": dubber.nome,
+        "cognome": dubber.cognome,
+        "sesso": dubber.sesso,
+        "telefono": dubber.telefono,
+        "anno": dubber.anno,
+        "luogo": dubber.luogo,
+        "note": dubber.note,
+        "email": dubber.email,
+        "madrelingua": dubber.madrelingua,
+        "accentistranieri": dubber.accentistranieri,
+        "accentiregionali": dubber.accentiregionali,
+        "foto": dubber.foto,
+        "audio": dubber.audio,
+      });
+    }
+  }
+
+  function updateTitle(title, id_user) {
+    console.log("DataApi: updateTitle ");
+
+    if (title.id) {
+      return client.post(settings.graphql_mutations.updateTitle, {
+        "id": title.id,
+        "titolo": title.titolo,
+        "originale": title.originale,
+        "tipo": title.tipo,
+        "anno": title.anno,
+        "direttore": title.direttore,
+        "assistente": title.assistente,
+        "dialoghi": title.dialoghi,
+        "studio": title.studio,
+        "id_user": id_user,
+      });
+    } else {
+      return client.post(settings.graphql_mutations.createTitle, {
+        "titolo": title.titolo,
+        "originale": title.originale,
+        "tipo": title.tipo,
+        "anno": title.anno,
+        "direttore": title.direttore,
+        "assistente": title.assistente,
+        "dialoghi": title.dialoghi,
+        "studio": title.studio,
+        "id_user": id_user,
+      });
+    }
   }
 
   function updateDubberNote(id_dubber, dubbernote, id_user) {

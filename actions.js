@@ -16,6 +16,7 @@ function createActions(sets, mdl, api) {
     onNavigateTo: onNavigateTo,
 
     submitLogin: submitLogin,
+    submitGuestLogin: submitGuestLogin,
 
     dubbers: dubbers,
     submitSearchDubber: submitSearchDubber,
@@ -32,6 +33,7 @@ function createActions(sets, mdl, api) {
     clearSearchTitle: clearSearchTitle,
 
     title: title,
+    submitUpdateTitle: submitUpdateTitle,
     editTitlenote: editTitlenote,
     changeTitlenoteDubber: changeTitlenoteDubber,
     submitUpdateTitlenote: submitUpdateTitlenote,
@@ -84,6 +86,7 @@ function createActions(sets, mdl, api) {
         poster: "",
         casts: []
       };
+      model.titleedit = {};
       model.titlenoteedit = {};
 
       model.casts = [];
@@ -102,9 +105,12 @@ function createActions(sets, mdl, api) {
     } else if (routeName == "dubber") {
       model.mainMenuToggle = false;
       return dubber(params.id)
+    } else if (routeName == "dubbercreate") {
+      model.mainMenuToggle = false;
+      model.dubberedit = {};
     } else if (routeName == "dubberedit") {
       model.mainMenuToggle = false;
-      return dubberedit(params.id)
+      return dubberedit(params.id);
     } else if (routeName == "dubbernoteedit") {
       model.mainMenuToggle = false;
       return dubbernoteedit(params.id)
@@ -112,6 +118,12 @@ function createActions(sets, mdl, api) {
       model.mainMenuToggle = false;
       model.titlenoteedit = {};
       return title(params.id)
+    } else if (routeName == "titlecreate") {
+      model.mainMenuToggle = false;
+      model.titleedit = {};
+    } else if (routeName == "titleedit") {
+      model.mainMenuToggle = false;
+      return titleedit(params.id)
     } else if (routeName == "titlenotes") {
       model.mainMenuToggle = false;
       return titlenotes(params.id, params.attore)
@@ -140,6 +152,22 @@ function createActions(sets, mdl, api) {
       e.preventDefault();
     }
     return login(model.user.email, model.user.password)
+      .then(function(res) {
+        settings.graphql_options.headers = {
+          "Authorization": "Bearer " + model.login.token
+        };
+        m.route.set("/dubbers");
+      })
+      .catch(function(err) {
+        console.error(err)
+      })
+  }
+
+  function submitGuestLogin(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    return login('guest', 'changeme')
       .then(function(res) {
         settings.graphql_options.headers = {
           "Authorization": "Bearer " + model.login.token
@@ -236,6 +264,21 @@ function createActions(sets, mdl, api) {
       })
       .catch(function(err) {
         console.error(err);
+        model.loading = false;
+      })
+  }
+
+  function titleedit(id) {
+    return dataApi.title(id)
+      .then(function(res) {
+        if (!res.errors) {
+          model.titleedit = res.data.title;
+          console.log(model.titleedit);
+        }
+        model.loading = false;
+      })
+      .catch(function(err) {
+        console.error(err)
         model.loading = false;
       })
   }
@@ -419,6 +462,28 @@ function createActions(sets, mdl, api) {
         }
         model.loading = false;
         model.dubberedit.audio = res.destination;
+      })
+      .catch(function(err) {
+        console.error(err);
+        model.loading = false;
+      })
+  }
+
+  function submitUpdateTitle(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    model.loading = true;
+    m.redraw();
+    return dataApi.updateTitle(model.titleedit, model.login.id)
+      .then(function(res) {
+        if (!res.errors) {
+          console.log(res);
+        }
+        model.loading = false;
+        console.log(model.titleedit);
+        console.log(res.data);
+        m.route.set("/title/" + (model.titleedit.id ? model.titleedit.id : res.data.createTitle.id));
       })
       .catch(function(err) {
         console.error(err);

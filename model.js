@@ -32,6 +32,7 @@ function createModel(s) {
 
     titles: [],
     title: {titolo: "", poster: "", casts: []},
+    titleedit: {},
     titlenote: {attore: "", personaggio: "", foto: undefined},
     titlenoteedit: {},
 

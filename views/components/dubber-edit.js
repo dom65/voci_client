@@ -30,7 +30,7 @@ export default function(model, actions) {
               onsubmit: actions.submitUpdateDubber,
               disabled: false,
             }, [
-              m(".title", "Edit Dubber"),
+              m(".title", d.id ? "Modifica Doppiatore" : "Nuovo Doppiatore"),
 
               m(".field.is-horizontal", [
                 m(".field-label.is-normal",
@@ -39,8 +39,8 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input.is-disabled[placeholder='Dubber Name'][type='text']", {
-                        disabled: true,
+                      m("input.input.is-disabled[placeholder='Nome'][type='text']", {
+                        //disabled: true,
                         oninput: m.withAttr("value", function (v) {d.nome = v}),
                         value: d.nome
                       })
@@ -56,8 +56,8 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input.is-disabled[placeholder='Dubber Surname'][type='text']", {
-                        disabled: true,
+                      m("input.input.is-disabled[placeholder='Cognome'][type='text']", {
+                        //disabled: true,
                         oninput: m.withAttr("value", function (v) {d.cognome = v}),
                         value: d.cognome
                       })
@@ -75,7 +75,7 @@ export default function(model, actions) {
                     m(".control",
                       m(".select",
                         m("select", {
-                          disabled: true,
+                          //disabled: true,
                           onchange: m.withAttr("value", function (v) {d.sesso = v}),
                           value: d.sesso
                         }, [
@@ -96,7 +96,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Year of birth'][type='number'][min='1920'][max='2018']", {
+                      m("input.input[placeholder='Anno di nascita'][type='number'][min='1920'][max='2018']", {
                         oninput: m.withAttr("value", function (v) {d.anno = v}),
                         value: d.anno
                       })
@@ -112,7 +112,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Place of birth'][type='text']", {
+                      m("input.input[placeholder='Luogo di nascita'][type='text']", {
                         oninput: m.withAttr("value", function (v) {d.luogo = v}),
                         value: d.luogo
                       })
@@ -128,7 +128,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Dubber phone'][type='phone']", {
+                      m("input.input[placeholder='Telefono'][type='phone']", {
                         oninput: m.withAttr("value", function (v) {d.telefono = v}),
                         value: d.telefono
                       })
@@ -144,7 +144,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Dubber email'][type='email']", {
+                      m("input.input[placeholder='Email'][type='email']", {
                         oninput: m.withAttr("value", function (v) {d.email = v}),
                         value: d.email
                       })
@@ -224,7 +224,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("textarea.textarea[placeholder='Dubber note'][rows='3']", {
+                      m("textarea.textarea[placeholder='Note'][rows='3']", {
                         oninput: m.withAttr("value", function (v) {d.note = v}),
                         value: d.note
                       })
@@ -248,7 +248,7 @@ export default function(model, actions) {
                               m("i.fas.fa-upload")
                             ),
                             m("span.file-label",
-                              "Image file…"
+                              "Carica Foto"
                             )
                           ]
                         ),
@@ -276,7 +276,7 @@ export default function(model, actions) {
                               m("i.fas.fa-upload")
                             ),
                             m("span.file-label",
-                              "Audio file…"
+                              "Carica Audio"
                             )
                           ]
                         ),
@@ -299,7 +299,7 @@ export default function(model, actions) {
                       m("a.button.is-block.is-info.is-fullwidth", {
                           onclick: actions.submitUpdateDubber
                         },
-                        "Update"
+                        d.id ? "Modifica" : "Crea"
                       )
                     )
                   )

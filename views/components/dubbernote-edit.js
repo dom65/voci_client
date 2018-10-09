@@ -31,7 +31,7 @@ export default function(model, actions) {
               onsubmit: actions.submitUpdateDubberNote,
               disabled: false,
             }, [
-              m(".title", "Edit Dubber Tags"),
+              m(".title", "Modifica Tags"),
 
               m(".field.is-horizontal", [
                 m(".field-label.is-normal",
@@ -71,7 +71,7 @@ export default function(model, actions) {
                           onchange: m.withAttr("value", function (v) {n.ruolo = v}),
                           value: n.ruolo
                         }, [
-                          m("option", { value: "" }, "Role"),
+                          m("option", { value: "" }, ""),
                           m("option", { value: "Protagonista" }, "Protagonista"),
                           m("option", { value: "Carattere" }, "Carattere"),
                           m("option", { value: "Secondari" }, "Secondari"),
@@ -95,7 +95,7 @@ export default function(model, actions) {
                           onchange: m.withAttr("value", function (v) {n.etavoce = v}),
                           value: n.etavoce
                         }, [
-                          m("option", { value: "" }, m.trust("Et&agrave; voce")),
+                          m("option", { value: "" }, ""),
                           m("option", { value: "Bambina" }, "Bambina"),
                           m("option", { value: "Giovane" }, "Giovane"),
                           m("option", { value: "Matura" }, "Matura"),
@@ -182,7 +182,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Sync'][type='number'][min='1'][max='5']", {
+                      m("input.input[placeholder='Sinch'][type='number'][min='1'][max='5']", {
                         oninput: m.withAttr("value", function (v) {n.sync = v}),
                         value: n.sync
                       })
@@ -233,7 +233,7 @@ export default function(model, actions) {
                       m("a.button.is-block.is-info.is-fullwidth", {
                           onclick: actions.submitUpdateDubberNote
                         },
-                        "Update"
+                        "Salva"
                       )
                     )
                   )

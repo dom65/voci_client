@@ -20,7 +20,7 @@ export default function(model, actions) {
 
             m(".media-content", [
               m("p.title.is-4",
-                d.nome + " " + d.cognome
+                (d.nome ? d.nome + " " : "") + (d.cognome ? d.cognome : "")
               ),
 
               m("p", [m("strong", "Anno nascita: "), (d.anno ? d.anno : "")]),
@@ -42,7 +42,7 @@ export default function(model, actions) {
               type: "audio/mp3"
             }) : null,
             m("p"),
-            model.login.isadmin == 1 ?
+            model.login.isadmin == 1 || model.login.email == d.email ?
             m(".level.is-mobile", [
               m(".level-left", ""),
               m(".level-right",
@@ -54,7 +54,7 @@ export default function(model, actions) {
                     m("span.icon",
                       m("i.far.fa-lg.fa-edit")
                     ),
-                    m("span", "Edit Data")
+                    m("span", "Modifica")
                   ]),
                 ]
               )
@@ -98,7 +98,7 @@ export default function(model, actions) {
                   m("span.icon",
                     m("i.far.fa-lg.fa-comment")
                   ),
-                  m("span", "Edit Tags")
+                  m("span", "Modifica Tags")
                 ]),
               ]
             )

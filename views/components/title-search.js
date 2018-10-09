@@ -11,21 +11,21 @@ export default function(model, actions) {
         onsubmit: actions.submitSearchTitle,
         disabled: false,
       }, [
-        m(".title", "Search Titles"),
+        m(".title", "Ricerca Titoli"),
 
-        m(".field",
+        model.login.isadmin == 1 ? m(".field",
           m(".control", [
             m("input[type='checkbox']", {
               onclick: m.withAttr("checked", function (v) {if (v) model.searchTitle.user = 1; else model.searchTitle.user = 0}),
               checked: model.searchTitle.user == 1
             }),
-            " Only my titles"
+            " Solo le mie distribuzioni"
           ])
-        ),
+        ) : null,
 
         m(".field", [
           m(".control",
-            m("input.input[placeholder='Title name'][type='text']", {
+            m("input.input[placeholder='Titolo'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleTitle),
               value: model.searchTitle.titolo
             })
@@ -34,7 +34,7 @@ export default function(model, actions) {
 
         m(".field", [
           m(".control",
-            m("input.input[placeholder='Actor'][type='text']", {
+            m("input.input[placeholder='Attore originale'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleActor),
               value: model.searchTitle.attore
             })
@@ -42,7 +42,7 @@ export default function(model, actions) {
         ]),
         m(".field", [
           m(".control",
-            m("input.input[placeholder='Dubber name'][type='text']", {
+            m("input.input[placeholder='Doppiatore'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleDubber),
               value: model.searchTitle.doppiatore
             })
@@ -55,7 +55,7 @@ export default function(model, actions) {
                 onchange: m.withAttr("value", model.setSearchTitleTipo),
                 value: model.searchTitle.tipo
               }, [
-                m("option", {value: ""}, "Select Genre"),
+                m("option", {value: ""}, "Selezione Genere ..."),
                 m("option", {value: "FILM"}, "FILM"),
                 m("option", {value: "TELEFILM"}, "TELEFILM"),
                 m("option", {value: "VIDEOGAME"}, "VIDEOGAME")
@@ -71,13 +71,13 @@ export default function(model, actions) {
                   onclick: actions.submitSearchTitle,
                   disabled: !this.canSubmit(),
                 },
-                "Search Titles"
+                "Cerca"
               )
             ),
             m("button.button.is-text", {
                 onclick: actions.clearSearchTitle
               },
-              "Clear"
+              "Ripulisci"
             ),
 
           ]

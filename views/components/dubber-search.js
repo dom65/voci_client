@@ -11,17 +11,17 @@ export default function(model, actions) {
         onsubmit: actions.submitSearchDubber,
         disabled: false,
       }, [
-        m(".title", "Search Dubbers"),
+        m(".title", "Ricerca Doppiatori"),
 
-        m(".field",
+        model.login.isadmin == 1 ? m(".field",
           m(".control", [
             m("input[type='checkbox']", {
               onclick: m.withAttr("checked", function (v) {if (v) model.searchDubber.user = 1; else model.searchDubber.user = 0}),
               checked: model.searchDubber.user == 1
             }),
-            " Only my tags"
+            " Solo i miei tags"
           ])
-        ),
+        ) : null,
 
         model.searchDubber.user == 1 ? m(".field",
           m(".control",
@@ -30,7 +30,7 @@ export default function(model, actions) {
                 onchange: m.withAttr("value", function (v) {model.searchDubber.tags.voce = v}),
                 value: model.searchDubber.tags.voce
               }, [
-                m("option", { value: "" }, "Voice"),
+                m("option", { value: "" }, "Voce"),
                 m("option", { value: "Nera" }, "Nera"),
                 m("option", { value: "Scura" }, "Scura"),
                 m("option", { value: "Rauca" }, "Rauca"),
@@ -49,7 +49,7 @@ export default function(model, actions) {
                 onchange: m.withAttr("value", function (v) {model.searchDubber.tags.ruolo = v}),
                 value: model.searchDubber.tags.ruolo
               }, [
-                m("option", { value: "" }, "Role"),
+                m("option", { value: "" }, "Ruolo"),
                 m("option", { value: "Protagonista" }, "Protagonista"),
                 m("option", { value: "Carattere" }, "Carattere"),
                 m("option", { value: "Secondari" }, "Secondari"),
@@ -170,14 +170,14 @@ export default function(model, actions) {
           )
         ]),
 
-        m(".field", [
+        model.searchDubber.user != 1 ? m(".field", [
           m(".control",
-            m("input.input[placeholder='Dubber name'][type='text']", {
+            m("input.input[placeholder='Cognome Attore'][type='text']", {
               oninput: m.withAttr("value", model.setSearchDubberDeno),
               value: model.searchDubber.deno
             })
           )
-        ]),
+        ]) : null,
 
         m(".field.is-grouped",
           [
@@ -186,13 +186,13 @@ export default function(model, actions) {
                   onclick: actions.submitSearchDubber,
                   disabled: !this.canSubmit(),
                 },
-                "Search"
+                "Cerca"
               )
             ),
             m("button.button.is-text", {
                 onclick: actions.clearSearchDubber
               },
-              "Clear"
+              "Ripulisci"
             ),
 
           ]

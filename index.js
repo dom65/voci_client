@@ -10,6 +10,7 @@ import SearchLayout from './views/search-layout';
 
 import DubberSearch from './views/components/dubber-search';
 import DubberList from './views/components/dubber-list';
+
 import DubberView from './views/components/dubber-view';
 import DubberDetail from './views/components/dubber-detail';
 import DubberEdit from './views/components/dubber-edit';
@@ -20,9 +21,11 @@ import DubberNoteEditMedia from './views/components/dubbernote-editmedia';
 
 import TitleSearch from './views/components/title-search';
 import TitleList from './views/components/title-list';
+
 import TitleView from './views/components/title-view';
 import TitleDetail from './views/components/title-detail';
 import TitleEdit from './views/components/title-edit';
+import TitleEditMedia from './views/components/title-editmedia';
 
 import TitlenoteView from './views/components/titlenote-view';
 import TitlenoteDetail from './views/components/titlenote-detail';
@@ -117,6 +120,12 @@ var settings = {
       }\
     }',
 
+    createDubber: 'mutation($nome: String!, $cognome: String!, $sesso: String!, $telefono: String, $anno: Int, $luogo: String, $note: String, $email: String, $madrelingua: String, $accentistranieri: Int, $accentiregionali: Int, $foto: String, $audio: String) {\
+      createDubber(input: {nome: $nome, cognome: $cognome, sesso: $sesso, telefono: $telefono, anno: $anno, luogo: $luogo, note: $note, email: $email, madrelingua: $madrelingua, accentistranieri: $accentistranieri, accentiregionali: $accentiregionali, foto: $foto, audio: $audio}) {\
+        id\
+      }\
+    }',
+
     updateDubber: 'mutation($id: ID!, $nome: String!, $cognome: String!, $sesso: String!, $telefono: String, $anno: Int, $luogo: String, $note: String, $email: String, $madrelingua: String, $accentistranieri: Int, $accentiregionali: Int, $foto: String, $audio: String) {\
       updateDubber(id: $id, input: {nome: $nome, cognome: $cognome, sesso: $sesso, telefono: $telefono, anno: $anno, luogo: $luogo, note: $note, email: $email, madrelingua: $madrelingua, accentistranieri: $accentistranieri, accentiregionali: $accentiregionali, foto: $foto, audio: $audio})\
     }',
@@ -131,6 +140,15 @@ var settings = {
       updateDubbernote(id: $id, input: {voce: $voce, ruolo: $ruolo, etavoce: $etavoce, cartoni: $cartoni, canta: $canta, piuvoci: $piuvoci, teatro: $teatro, sync: $sync, giudizio: $giudizio, note: $note, id_dubber: $id_dubber, id_user: $id_user})\
     }',
 
+    createTitle: 'mutation($titolo: String!, $originale: String, $tipo: String, $anno: String, $direttore: String, $assistente: String, $dialoghi: String, $studio: String, $id_user: ID) {\
+      createTitle(input: {titolo: $titolo, originale: $originale, tipo: $tipo, anno: $anno, direttore: $direttore, assistente: $assistente, dialoghi: $dialoghi, studio: $studio, id_user: $id_user}) {\
+        id\
+      }\
+    }',
+
+    updateTitle: 'mutation($id: ID!, $titolo: String!, $originale: String, $tipo: String, $anno: String, $direttore: String, $assistente: String, $dialoghi: String, $studio: String, $id_user: ID) {\
+      updateTitle(id: $id, input: {titolo: $titolo, originale: $originale, tipo: $tipo, anno: $anno, direttore: $direttore, assistente: $assistente, dialoghi: $dialoghi, studio: $studio, id_user: $id_user})\
+    }',
 
     createTitlenote: 'mutation($stagione: Int, $episodio: Int, $personaggio: String, $fotop: String, $attore: String, $doppiatore: String, $id_dubber: ID, $id_title: ID!, $id_user: ID!) {\
       createTitlenote(input: {stagione: $stagione, episodio: $episodio, personaggio: $personaggio, fotop: $fotop, attore: $attore, doppiatore: $doppiatore, id_dubber: $id_dubber, id_title: $id_title, id_user: $id_user}) {\
@@ -156,19 +174,26 @@ var model = createModel(settings),
 
 var vwLogin = LoginPage(model, actions),
   vwSearchLayout = SearchLayout(model, actions),
+
   vwDubberSearch = DubberSearch(model, actions),
   vwDubberList = DubberList(model, actions),
+
   vwDubberView = DubberView(model, actions),
   vwDubberDetail = DubberDetail(model, actions),
   vwDubberEdit = DubberEdit(model, actions),
   vwDubberEditMedia = DubberEditMedia(model, actions),
+
   vwDubberNoteEdit = DubberNoteEdit(model, actions),
   vwDubberNoteEditMedia = DubberNoteEditMedia(model, actions),
+
   vwTitleSearch = TitleSearch(model, actions),
   vwTitleList = TitleList(model, actions),
+
   vwTitleView = TitleView(model, actions),
-  vwTitleEdit = TitleEdit(model, actions),
   vwTitleDetail = TitleDetail(model, actions),
+  vwTitleEdit = TitleEdit(model, actions),
+  vwTitleEditMedia = TitleEditMedia(model, actions),
+
   vwTitlenoteView = TitlenoteView(model, actions),
   vwTitlenoteDetail = TitlenoteDetail(model, actions),
   vwCastView = CastView(model, actions),
@@ -234,6 +259,17 @@ m.route(document.body, '/splash', {
       ]);
     },
   },
+  '/dubbercreate': {
+    onmatch: function(params, route) {
+      return actions.onNavigateTo("dubbercreate", params, route)
+    },
+    render: function(vnode) {
+      return m(vwSearchLayout, vnode.attrs, [
+        m(vwDubberEditMedia, vnode.attrs),
+        m(vwDubberEdit, vnode.attrs)
+      ]);
+    },
+  },
   '/dubberedit/:id': {
     onmatch: function(params, route) {
       model.loading = true;
@@ -282,6 +318,31 @@ m.route(document.body, '/splash', {
       return m(vwSearchLayout, vnode.attrs, [
         m(vwTitleView, vnode.attrs),
         m(vwTitleDetail, vnode.attrs)
+      ]);
+    },
+  },
+  '/titlecreate': {
+    onmatch: function(params, route) {
+      return actions.onNavigateTo("titlecreate", params, route)
+    },
+    render: function(vnode) {
+      return m(vwSearchLayout, vnode.attrs, [
+        m(vwTitleEditMedia, vnode.attrs),
+        m(vwTitleEdit, vnode.attrs)
+      ]);
+    },
+  },
+  '/titleedit/:id': {
+    onmatch: function(params, route) {
+      model.loading = true;
+      m.redraw();
+      console.log(params);
+      return actions.onNavigateTo("titleedit", params, route)
+    },
+    render: function(vnode) {
+      return m(vwSearchLayout, vnode.attrs, [
+        m(vwTitleEditMedia, vnode.attrs),
+        m(vwTitleEdit, vnode.attrs)
       ]);
     },
   },

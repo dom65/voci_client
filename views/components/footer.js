@@ -9,7 +9,7 @@ export default function(model, actions) {
           m(".content.has-text-centered",
             m("p", [
               m("strong",
-                "VOCI"
+                "VOCIT"
               ),
               " by ",
               m("a[href='mailto:info@kodedonda.it']",

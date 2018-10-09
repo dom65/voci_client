@@ -34,6 +34,18 @@ export default function(model, actions) {
               m("p", t.tipo, " - ", t.anno),
               m("p", "Direttore: " + t.direttore + " Assistente: " + t.assistente + " Dialoghi: " + t.dialoghi),
             ]),
+
+            user.isadmin == 1 ? m(".media-right",
+              m("a.button.is-info.is-small", {
+                href: '/titleedit/' + t.id,
+                oncreate: m.route.link
+              }, [
+                m("span.icon",
+                  m("i.far.fa-lg.fa-edit")
+                ),
+                m("span", "Edit title")
+              ])
+            ) : null
           ]),
 
           m("hr"),
@@ -50,7 +62,7 @@ export default function(model, actions) {
                   m("span.icon",
                     m("i.far.fa-lg.fa-edit")
                   ),
-                  m("span", "Create your distribution")
+                  m("span", "Nuova Distribuzione")
                 ]),
               ]
             )
@@ -187,7 +199,7 @@ export default function(model, actions) {
                                               m("i.fas.fa-upload")
                                             ),
                                             m("span.file-label",
-                                              "Image..."
+                                              ""
                                             )
                                           ]
                                         )

@@ -7,7 +7,7 @@ export default function(model, actions) {
       return m(".container.has-text-centered", [
         m(".column.is-6.is-offset-3", [
           m("h1.title",
-            "VOCI"
+            "VOCIT"
           ),
           m("h2.subtitle",
             "Oltre 1500 dopppiatori, la loro faccia, i loro titoli."
@@ -19,7 +19,7 @@ export default function(model, actions) {
               onsubmit: actions.submitLogin,
               disabled: false,
             }, [
-              
+
               m(".field",
                 m(".control",
                   m("input.input[name='user'][autofocus=''][placeholder='Your Email'][type='email'][required]", {
@@ -37,27 +37,27 @@ export default function(model, actions) {
                   })
                 )
               ),
-              m(".field",
-                m("label.checkbox", [
-                  m("input[type='checkbox']"),
-                  " Remember me"
-                ])
-              ),
               m("a.button.is-block.is-info.is-fullwidth", {
                   onclick: actions.submitLogin
                 },
-                "Login"
-              )
+                "Entra"
+              ),
+              m("br"),
+              m("button.button.is-text.is-small", {
+                  onclick: actions.submitGuestLogin
+                },
+                "Entra come ospite"
+              ),
             ])
           ]),
           m("p.has-text-grey", [
-            m("a[href='../']",
-              "Forgot Password"
+            m("a",
+              "Password dimenticata?"
             ),
             " · ",
             m.trust("&nbsp;"),
-            m("a[href='../']",
-              "Need Help?"
+            m("a",
+              "Hai bisogno di aiuto?"
             )
           ])
         ])

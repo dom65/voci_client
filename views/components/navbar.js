@@ -10,7 +10,7 @@ export default function(model, actions) {
         m(".navbar-brand", [
           m(".navbar-item",
             //m("img[alt='Voci'][height='29'][width='112']", {src: brand_img})
-            m(".title.has-text-white", "VOCI"),
+            m(".title.has-text-white", "VOCIT"),
           ),
           m('a.navbar-burger', {
             class: model.mainMenuToggle ? 'is-active' : '',
@@ -31,17 +31,49 @@ export default function(model, actions) {
                 model.login.email
               ]),
               m(".navbar-dropdown", [
-                m("a.navbar-item[disabled = !model.user.idAdmin][href='/admin']", {
+                model.login.isadmin == 1
+                ? m("a.navbar-item[href='/dubbercreate']", {
                   oncreate: m.route.link
                 }, [
-                  m("i.fa.fa-id-card.fa-2"),
-                  "  Profile"
-                ]),
+                  m("span.icon",
+                    m("i.fas.fa-microphone")
+                  ),
+                  m("span",
+                    "Nuovo Doppiatore"
+                  )
+                ]) : null,
+                model.login.isadmin == 1
+                ? m("a.navbar-item[href='/titlecreate']", {
+                  oncreate: m.route.link
+                }, [
+                  m("span.icon",
+                    m("i.fas.fa-film")
+                  ),
+                  m("span",
+                    "Nuovo Titolo"
+                  )
+                ]) : null,
+                model.login.email != 'guest'
+                ? m("a.navbar-item[href='/profile']", {
+                  disabled: true,
+                  oncreate: m.route.link
+                }, [
+                  m("span.icon",
+                    m("i.fas.fa-id-card")
+                  ),
+                  m("span",
+                    "Profilo"
+                  )
+                ]) : null,
                 m("a.navbar-item[href='/logout']", {
                   oncreate: m.route.link
                 }, [
-                  m("i.fa.fa-sign-out.fa-2"),
-                  "  Logout"
+                  m("span.icon",
+                    m("i.fas.fa-sign-out-alt")
+                  ),
+                  m("span",
+                    "Esci"
+                  )
                 ])
               ])
             ]),
@@ -57,7 +89,7 @@ export default function(model, actions) {
                       m("i.fas.fa-microphone")
                     ),
                     m("span",
-                      "Dubbers"
+                      "Doppiatori"
                     )
                   ])
                 ),
@@ -69,7 +101,7 @@ export default function(model, actions) {
                       m("i.fas.fa-film")
                     ),
                     m("span",
-                      "Titles"
+                      "Titoli"
                     )
                   ])
                 )
