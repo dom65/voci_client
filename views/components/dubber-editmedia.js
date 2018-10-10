@@ -20,7 +20,7 @@ export default function(model, actions) {
           m(".media", [
             m(".media-content", [
               m("p.title.is-4",
-                d.nome + " " + d.cognome
+                (d.nome ? d.nome + " " : "") + (d.cognome ? d.cognome : "")
               ),
               m("p", [m("strong", "Anno nascita: "), (d.anno ? d.anno : "")]),
               m("p", [m("strong", "Luogo nascita: "), (d.luogo ? d.luogo : "")]),

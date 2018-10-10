@@ -39,7 +39,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input.is-disabled[placeholder='Nome'][type='text']", {
+                      m("input.input.is-disabled[placeholder='Nome'][type='text'][required='']", {
                         //disabled: true,
                         oninput: m.withAttr("value", function (v) {d.nome = v}),
                         value: d.nome
@@ -56,7 +56,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input.is-disabled[placeholder='Cognome'][type='text']", {
+                      m("input.input.is-disabled[placeholder='Cognome'][type='text'][required='']", {
                         //disabled: true,
                         oninput: m.withAttr("value", function (v) {d.cognome = v}),
                         value: d.cognome
@@ -238,7 +238,7 @@ export default function(model, actions) {
                   m("label.label", "")
                 ),
                 m(".field-body",
-                  m(".file.has-name.is-expanded",
+                  m(".file.has-name",
                     m("label.file-label",
                       [
                         m("input.file-input[name='mediafile'][type='file']", {onchange: actions.uploadDubberImage}),

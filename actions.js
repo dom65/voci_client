@@ -385,7 +385,7 @@ function createActions(sets, mdl, api) {
           console.log(res);
         }
         model.loading = false;
-        m.route.set("/dubber/" + model.dubberedit.id);
+        m.route.set("/dubber/" + (model.dubberedit.id ? model.dubberedit.id : res.data.createDubber.id));
       })
       .catch(function(err) {
         console.error(err);

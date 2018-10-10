@@ -43,7 +43,7 @@ export default function(model, actions) {
                 m("span.icon",
                   m("i.far.fa-lg.fa-edit")
                 ),
-                m("span", "Edit title")
+                m("span", "Modifica")
               ])
             ) : null
           ]),
@@ -54,7 +54,7 @@ export default function(model, actions) {
             m(".level-left", ""),
             m(".level-right",
               [
-                m("a.button.is-info.level-item", {
+                m("a.button.is-info.is-small.level-item", {
                   onclick: function() {
                     model.titlenoteedit.id = '0';
                   },
@@ -259,7 +259,7 @@ export default function(model, actions) {
 
           m("hr"),
 
-          m("table.table.is-striped.is-narrow.is-fullwidth.is-size-7", [
+          t.casts.length > 0 ? m("table.table.is-striped.is-narrow.is-fullwidth.is-size-7", [
             m("thead",
               m("tr", ["personaggio", "attore", "doppiatore"].map(function(col) {
                 return m("th", col.toUpperCase().replace(/_/g, ' '));
@@ -290,7 +290,7 @@ export default function(model, actions) {
                 ])
               })
             )
-          ]),
+          ]) : null,
 
 
 

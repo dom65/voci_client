@@ -47,14 +47,14 @@ export default function(model, actions) {
               m(".level-left", ""),
               m(".level-right",
                 [
-                  m("a.button.is-info.level-item", {
+                  m("a.button.is-info.level-item.is-small", {
                     href: '/dubberedit/' + vnode.attrs.id,
                     oncreate: m.route.link
                   }, [
                     m("span.icon",
                       m("i.far.fa-lg.fa-edit")
                     ),
-                    m("span", "Modifica")
+                    m("span", "Modifica Dati")
                   ]),
                 ]
               )
@@ -91,14 +91,14 @@ export default function(model, actions) {
             m(".level-left", ""),
             m(".level-right",
               [
-                m("a.button.is-info.level-item", {
+                m("a.button.is-info.level-item.is-small", {
                   href: '/dubbernoteedit/' + vnode.attrs.id,
                   oncreate: m.route.link
                 }, [
                   m("span.icon",
                     m("i.far.fa-lg.fa-comment")
                   ),
-                  m("span", "Modifica Tags")
+                  m("span", d.dubbernotes.length > 0 ? "Modifica Tags" : "Aggiungi Tags")
                 ]),
               ]
             )

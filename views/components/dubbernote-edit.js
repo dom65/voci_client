@@ -45,7 +45,7 @@ export default function(model, actions) {
                           onchange: m.withAttr("value", function (v) {n.voce = v}),
                           value: n.voce
                         }, [
-                          m("option", { value: "" }, "Voice"),
+                          m("option", { value: "" }, ""),
                           m("option", { value: "Nera" }, "Nera"),
                           m("option", { value: "Scura" }, "Scura"),
                           m("option", { value: "Rauca" }, "Rauca"),

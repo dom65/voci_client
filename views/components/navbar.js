@@ -54,9 +54,9 @@ export default function(model, actions) {
                   )
                 ]) : null,
                 model.login.email != 'guest'
-                ? m("a.navbar-item[href='/profile']", {
+                ? m("a.navbar-item[]", {
                   disabled: true,
-                  oncreate: m.route.link
+                  //oncreate: m.route.link
                 }, [
                   m("span.icon",
                     m("i.fas.fa-id-card")
