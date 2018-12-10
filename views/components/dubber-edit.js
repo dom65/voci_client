@@ -26,7 +26,7 @@ export default function(model, actions) {
           //  )
           ),
           m(".media-content", [
-            m("form", {
+            m("form[id='dubberform']", {
               onsubmit: actions.submitUpdateDubber,
               disabled: false,
             }, [
@@ -79,7 +79,7 @@ export default function(model, actions) {
                           onchange: m.withAttr("value", function (v) {d.sesso = v}),
                           value: d.sesso
                         }, [
-                          m("option", { value: "" }, "Sesso"),
+                          m("option", { value: "" }, ""),
                           m("option", { value: "M" }, "Maschio"),
                           m("option", { value: "F" }, "Femmina")
                         ])
@@ -96,9 +96,9 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Anno di nascita'][type='number'][min='1920'][max='2018']", {
+                      m("input.input[placeholder='Anno di nascita'][type='number'][pattern='[0-9]'][min='1920'][max='2018']", {
                         oninput: m.withAttr("value", function (v) {d.anno = v}),
-                        value: d.anno
+                        value: parseInt(d.anno)
                       })
                     )
                   )
@@ -152,7 +152,7 @@ export default function(model, actions) {
                   )
                 )
               ]),
-
+/*
               m(".field.is-horizontal", [
                 m(".field-label.is-normal",
                   m("label.label", "Madrelingua")
@@ -216,7 +216,7 @@ export default function(model, actions) {
                   )
                 )
               ]),
-
+*/
               m(".field.is-horizontal", [
                 m(".field-label.is-normal",
                   m("label.label", "Note")
@@ -297,7 +297,11 @@ export default function(model, actions) {
                   m(".field",
                     m(".control",
                       m("a.button.is-block.is-info.is-fullwidth", {
-                          onclick: actions.submitUpdateDubber
+                          onclick: function(e) {
+                            if (document.getElementById('dubberform').reportValidity()) {
+                              actions.submitUpdateDubber(e)
+                            }
+                          }
                         },
                         d.id ? "Modifica" : "Crea"
                       )

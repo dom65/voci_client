@@ -39,7 +39,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input.is-disabled[placeholder='Titolo'][type='text']", {
+                      m("input.input.is-disabled[placeholder='Titolo'][type='text'][required='']", {
                         oninput: m.withAttr("value", function (v) {t.titolo = v}),
                         value: t.titolo
                       })
@@ -76,7 +76,7 @@ export default function(model, actions) {
                           onchange: m.withAttr("value", function (v) {t.tipo = v}),
                           value: t.tipo
                         }, [
-                          m("option", {value: ""}, "Seleziona Genere"),
+                          m("option", {value: ""}, ""),
                           m("option", {value: "FILM"}, "FILM"),
                           m("option", {value: "TELEFILM"}, "TELEFILM"),
                           m("option", {value: "VIDEOGAME"}, "VIDEOGAME")
@@ -94,9 +94,9 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Anno'][type='number'][min='1920'][max='2028']", {
+                      m("input.input[placeholder='Anno'][type='number'][pattern='[0-9]'][min='1920'][max='2028']", {
                         oninput: m.withAttr("value", function (v) {t.anno = v}),
-                        value: t.anno
+                        value: parseInt(t.anno)
                       })
                     )
                   )
@@ -126,7 +126,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Assistente'][type='phone']", {
+                      m("input.input[placeholder='Assistente'][type='text']", {
                         oninput: m.withAttr("value", function (v) {t.assistente = v}),
                         value: t.assistente
                       })
@@ -142,7 +142,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Dialoghi'][type='email']", {
+                      m("input.input[placeholder='Dialoghi'][type='text']", {
                         oninput: m.withAttr("value", function (v) {t.dialoghi = v}),
                         value: t.dialoghi
                       })
@@ -158,7 +158,7 @@ export default function(model, actions) {
                 m(".field-body",
                   m(".field",
                     m(".control",
-                      m("input.input[placeholder='Studio'][type='email']", {
+                      m("input.input[placeholder='Studio'][type='text']", {
                         oninput: m.withAttr("value", function (v) {t.studio = v}),
                         value: t.studio
                       })

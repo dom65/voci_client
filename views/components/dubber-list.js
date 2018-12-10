@@ -7,8 +7,8 @@ export default function(model, actions) {
   return {
     view: function() {
       return m(".columns.is-multiline", model.dubbers.map(d => {
-        return m(".column.is-half", [
-          m("article.media", [
+        return m(".column.is-one-third", [
+          m(".box", m("article.media", [
             m(".media-left",
               m("figure.image.is-64x64",
                 m("img.is-rounded", {
@@ -19,7 +19,7 @@ export default function(model, actions) {
               )
             ),
             m(".media-content", [
-              m("h4.subtitle",
+              m("p.subtitle.is-6",
                 m("a", {
                     href: '/dubber/' + d.id,
                     oncreate: m.route.link
@@ -31,7 +31,7 @@ export default function(model, actions) {
               d.luogo ? " - " + d.luogo : m.trust("&nbsp;"),
               m("br"),
             ]),
-          ])
+          ]))
         ]);
       }));
     },

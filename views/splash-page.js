@@ -32,7 +32,7 @@ export default function(vnode) {
         m(".hero-body",
           m(".container.has-text-centered", [
             m("img", {src: loading_img}),
-            m("div", "Loading VOCI ..."),
+            m("div", "Loading VOCIT ..."),
           ])
         )
       );

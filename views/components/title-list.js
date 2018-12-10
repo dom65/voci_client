@@ -5,7 +5,7 @@ export default function(model, actions) {
     view: function() {
       return m(".columns.is-multiline", model.titles.map(t => {
         return m(".column.is-half", [
-          m(".media", [
+          m(".box", m("article.media", [
             m(".media-left",
               m("span.icon.is-large",
                 m("i.fas.fa-3x", {
@@ -26,7 +26,7 @@ export default function(model, actions) {
                 t.tipo, " - ", t.anno
               ])
             ]),
-          ])
+          ]))
         ]);
       }));
     }

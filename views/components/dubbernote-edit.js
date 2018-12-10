@@ -46,12 +46,11 @@ export default function(model, actions) {
                           value: n.voce
                         }, [
                           m("option", { value: "" }, ""),
-                          m("option", { value: "Nera" }, "Nera"),
                           m("option", { value: "Scura" }, "Scura"),
-                          m("option", { value: "Rauca" }, "Rauca"),
-                          m("option", { value: "Leggera" }, "Leggera"),
-                          m("option", { value: "Pulita" }, "Pulita"),
-                          m("option", { value: "Speaker" }, "Speaker")
+                          m("option", { value: "Particolare" }, "Particolare"),
+                          m("option", { value: "Carattere" }, "Carattere"),
+                          m("option", { value: "Speaker" }, "Speaker"),
+                          m("option", { value: "Media" }, "Media")
                         ])
                       )
                     )
@@ -73,8 +72,7 @@ export default function(model, actions) {
                         }, [
                           m("option", { value: "" }, ""),
                           m("option", { value: "Protagonista" }, "Protagonista"),
-                          m("option", { value: "Carattere" }, "Carattere"),
-                          m("option", { value: "Secondari" }, "Secondari"),
+                          m("option", { value: "Secondario" }, "Secondario"),
                           m("option", { value: "Brusio" }, "Brusio")
                         ])
                       )
@@ -96,17 +94,19 @@ export default function(model, actions) {
                           value: n.etavoce
                         }, [
                           m("option", { value: "" }, ""),
-                          m("option", { value: "Bambina" }, "Bambina"),
-                          m("option", { value: "Giovane" }, "Giovane"),
-                          m("option", { value: "Matura" }, "Matura"),
-                          m("option", { value: "Anziana" }, "Anziana")
+                          m("option", { value: "15" }, "Fino a 15 anni"),
+                          m("option", { value: "30" }, "Da 16 a 30 anni"),
+                          m("option", { value: "45" }, "Da 31 a 45 anni"),
+                          m("option", { value: "60" }, "Da 46 a 60 anni"),
+                          m("option", { value: "75" }, "Da 61 a 75 anni"),
+                          m("option", { value: "90" }, "Da 76 a 90 anni")
                         ])
                       )
                     )
                   )
                 )
               ]),
-
+/*
               m(".field.is-horizontal", [
                 m(".field-label.is-normal",
                   m("label.label", "")
@@ -180,14 +180,19 @@ export default function(model, actions) {
                   m("label.label", "Sinch")
                 ),
                 m(".field-body",
-                  m(".field",
-                    m(".control",
-                      m("input.input[placeholder='Sinch'][type='number'][min='1'][max='5']", {
+                  m(".field.is-grouped", [
+                    m(".control.is-expanded",
+                      m("input.input[placeholder='Sinch'][type='range'][min='1'][max='5'][step='1']", {
                         oninput: m.withAttr("value", function (v) {n.sync = v}),
-                        value: n.sync
+                        value: parseInt(n.sync)
+                      })
+                    ),
+                    m(".control",
+                      m("input.input[readonly='']", {
+                        value: parseInt(n.sync)
                       })
                     )
-                  )
+                  ])
                 )
               ]),
 
@@ -196,17 +201,22 @@ export default function(model, actions) {
                   m("label.label", "Giudizio")
                 ),
                 m(".field-body",
-                  m(".field",
-                    m(".control",
-                      m("input.input[placeholder='Giudizio'][type='number'][min='1'][max='10']", {
+                  m(".field.is-grouped", [
+                    m(".control.is-expanded",
+                      m("input.input[placeholder='Giudizio'][type='range'][min='1'][max='10'][step='1']", {
                         oninput: m.withAttr("value", function (v) {n.giudizio = v}),
-                        value: n.giudizio
+                        value: parseInt(n.giudizio)
+                      })
+                    ),
+                    m(".control",
+                      m("input.input[readonly='']", {
+                        value: parseInt(n.giudizio)
                       })
                     )
-                  )
+                  ])
                 )
               ]),
-
+*/
               m(".field.is-horizontal", [
                 m(".field-label.is-normal",
                   m("label.label", "Note")

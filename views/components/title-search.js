@@ -11,21 +11,23 @@ export default function(model, actions) {
         onsubmit: actions.submitSearchTitle,
         disabled: false,
       }, [
-        m(".title", "Ricerca Titoli"),
+        m(".subtitle.has-text-weight-semibold", "Ricerca Titoli"),
 
         model.login.isadmin == 1 ? m(".field",
-          m(".control", [
-            m("input[type='checkbox']", {
-              onclick: m.withAttr("checked", function (v) {if (v) model.searchTitle.user = 1; else model.searchTitle.user = 0}),
-              checked: model.searchTitle.user == 1
-            }),
-            " Solo le mie distribuzioni"
-          ])
+          m(".control",
+            m("label.checkbox", [
+              m("input[type='checkbox']", {
+                onclick: m.withAttr("checked", function (v) {if (v) model.searchTitle.user = 1; else model.searchTitle.user = 0}),
+                checked: model.searchTitle.user == 1
+              }),
+              " Solo le mie distribuzioni"
+            ])
+          )
         ) : null,
 
         m(".field", [
           m(".control",
-            m("input.input[placeholder='Titolo'][type='text']", {
+            m("input.input.is-small[placeholder='Titolo'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleTitle),
               value: model.searchTitle.titolo
             })
@@ -34,7 +36,7 @@ export default function(model, actions) {
 
         m(".field", [
           m(".control",
-            m("input.input[placeholder='Attore originale'][type='text']", {
+            m("input.input.is-small[placeholder='Attore originale'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleActor),
               value: model.searchTitle.attore
             })
@@ -42,7 +44,7 @@ export default function(model, actions) {
         ]),
         m(".field", [
           m(".control",
-            m("input.input[placeholder='Doppiatore'][type='text']", {
+            m("input.input.is-small[placeholder='Doppiatore'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleDubber),
               value: model.searchTitle.doppiatore
             })
@@ -50,7 +52,7 @@ export default function(model, actions) {
         ]),
         m(".field", [
           m(".control",
-            m(".select",
+            m(".select.is-small",
               m("select", {
                 onchange: m.withAttr("value", model.setSearchTitleTipo),
                 value: model.searchTitle.tipo
@@ -67,14 +69,14 @@ export default function(model, actions) {
         m(".field.is-grouped",
           [
             m(".control",
-              m("button.button.is-block.is-info.is-fullwidth", {
+              m("button.button.is-block.is-info.is-small", {
                   onclick: actions.submitSearchTitle,
                   disabled: !this.canSubmit(),
                 },
                 "Cerca"
               )
             ),
-            m("button.button.is-text", {
+            m("button.button.is-text.is-small", {
                 onclick: actions.clearSearchTitle
               },
               "Ripulisci"

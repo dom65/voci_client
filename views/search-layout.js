@@ -12,8 +12,8 @@ export default function(model, actions) {
         m(".hero-body",
           m(".container.is-fluid",
             m(".columns", [
-              m(".column.is-4", vnode.children[0]),
-              m(".column.is-8", vnode.children[1])
+              m(".column.is-3", vnode.children[0]),
+              m(".column.is-9", vnode.children[1])
             ])
           )
         ),

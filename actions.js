@@ -96,6 +96,9 @@ function createActions(sets, mdl, api) {
         foto: ""
       };
 
+      clearSearchDubber();
+      clearSearchTitle();
+
       settings.graphql_options.headers = {};
       console.log("in onNavigateTo: user logged out");
     } else if (routeName == "dubbers") {
