@@ -16,8 +16,8 @@ export default function(model, actions) {
         m(".column.is-6.is-offset-3", [
           m(".box", [
             m("form", {
-              onsubmit: actions.submitLogin,
-              disabled: false,
+              //onsubmit: actions.submitLogin,
+              //disabled: false,
             }, [
 
               m(".field",
@@ -37,14 +37,18 @@ export default function(model, actions) {
                   })
                 )
               ),
-              m("a.button.is-block.is-info.is-fullwidth", {
-                  onclick: actions.submitLogin
-                },
-                "Entra"
+              m(".field",
+                m(".control",
+                  m("a.button.is-block.is-info.is-fullwidth", {
+                    onclick: actions.submitLogin
+                  }, "Entra")
+                )
               ),
+
               m("br"),
               m("button.button.is-text.is-small", {
-                  onclick: actions.submitGuestLogin
+                type: 'button',
+                onclick: actions.submitGuestLogin
                 },
                 "Entra come ospite"
               ),

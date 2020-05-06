@@ -42,11 +42,12 @@ function createDataApi(s) {
     });
   }
 
-  function dubbers(deno, sesso, anno, user, tags) {
+  function dubbers(deno, sesso, anno, cat, user, tags) {
     return client.post(settings.graphql_queries.dubbers, {
       "deno": deno,
       "sesso": sesso,
       "anno": anno,
+      "cat": cat,
       "user": user,
       "tags": tags,
     });
@@ -76,6 +77,7 @@ function createDataApi(s) {
         "telefono": dubber.telefono,
         "anno": dubber.anno,
         "luogo": dubber.luogo,
+        "cat": dubber.cat,
         "note": dubber.note,
         "email": dubber.email,
         "madrelingua": dubber.madrelingua,
@@ -92,6 +94,7 @@ function createDataApi(s) {
         "telefono": dubber.telefono,
         "anno": dubber.anno,
         "luogo": dubber.luogo,
+        "cat": dubber.cat,
         "note": dubber.note,
         "email": dubber.email,
         "madrelingua": dubber.madrelingua,
@@ -187,11 +190,13 @@ function createDataApi(s) {
     })
   }
 
-  function titles(titolo, attore, doppiatore, tipo, user) {
+  function titles(titolo, attore, doppiatore, direttore, assistente, tipo, user) {
     return client.post(settings.graphql_queries.titles, {
       "titolo": titolo ? titolo : undefined,
       "attore": attore ? attore : undefined,
       "doppiatore": doppiatore ? doppiatore : undefined,
+      "direttore": direttore ? direttore : undefined,
+      "assistente": assistente ? assistente : undefined,
       "tipo": tipo ? tipo : undefined,
       "user": user,
     });

@@ -6,6 +6,8 @@ export default function(model, actions) {
 
       var d = model.dubber;
 
+      console.log(d);
+
       return m(".card", [
 
         m(".card-content", [
@@ -30,8 +32,43 @@ export default function(model, actions) {
 
           m("hr"),
 
-          m(".content", [
-            //m("h4.subtitle.is-4", "casts"),
+          d.titles.length > 0
+          ? m(".content", [
+            m("h4.subtitle.is-4", "Direttore o assistente"),
+            m("table.table.is-striped.is-narrow.is-fullwidth.is-size-7", [
+              m("thead",
+                m("tr", ["titolo", "originale", "tipo", "anno"].map(function(col) {
+                  return m("th", col);
+                }))
+              ),
+              m("tbody",
+                d.titles.sort(function(a, b) {
+                  return b.anno - a.anno
+                }).map(function(row) {
+                  return m("tr", [
+                    m("td", [
+                      m("a", {
+                          href: '/title/' + row.id,
+                          oncreate: m.route.link
+                        },
+                        row.titolo
+                      )
+                    ]),
+                    m("td", row.originale ? row.originale : ""),
+                    m("td", row.tipo ? row.tipo : ""),
+                    m("td", row.anno ? row.anno : ""),
+
+
+                  ])
+                })
+              )
+            ]),
+          ])
+          : null,
+
+          d.casts.length > 0
+          ? m(".content", [
+            m("h4.subtitle.is-4", "Doppiaggi"),
             m("table.table.is-striped.is-narrow.is-fullwidth.is-size-7", [
               m("thead",
                 m("tr", ["personaggio", "attore", "titolo"].map(function(col) {
@@ -67,7 +104,8 @@ export default function(model, actions) {
                 })
               )
             ]),
-          ]),
+          ])
+          : null,
         ])
       ])
     }

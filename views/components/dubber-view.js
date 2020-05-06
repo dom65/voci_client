@@ -1,5 +1,8 @@
 import m from 'mithril';
 
+import placeholderF from "../../image/img_avatarF.jpg";
+import placeholderM from "../../image/img_avatarM.jpg";
+
 export default function(model, actions) {
   return {
     view: function(vnode) {
@@ -11,7 +14,8 @@ export default function(model, actions) {
           m("figure.image",
             m("img[alt='Placeholder image']", {
               style: "object-fit:cover; object-position: center;",
-              src: model.mediaOptions.url + d.foto
+              src: d.foto ? model.mediaOptions.url + d.foto
+              : d.sesso == 'F' ? placeholderF : placeholderM
             })
           )
         ),

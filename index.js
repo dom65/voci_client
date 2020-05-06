@@ -43,15 +43,15 @@ var settings = {
   },
 
   graphql_queries: {
-    dubbers: 'query($deno: String, $sesso: String, $anno: Int, $user: Int, $tags: DubbernoteFilter) {\
-	     dubbers(where: {deno: $deno, sesso: $sesso, anno: $anno, user: $user}, tags: $tags) {\
+    dubbers: 'query($deno: String, $sesso: String, $anno: Int, $cat: String, $user: Int, $tags: DubbernoteFilter) {\
+	     dubbers(where: {deno: $deno, sesso: $sesso, anno: $anno, cat: $cat, user: $user}, tags: $tags) {\
          id, nome, cognome, sesso, anno, luogo, foto\
        }\
     }',
 
     dubber: 'query($id: ID!) {\
     	dubber(id: $id) {\
-        id, nome, cognome, sesso, telefono, foto, audio, anno, luogo, note, email, madrelingua, accentistranieri, accentiregionali, casts {\
+        id, nome, cognome, sesso, telefono, foto, audio, anno, luogo, cat, note, email, madrelingua, accentistranieri, accentiregionali, casts {\
           id, personaggio, attore, title {\
             id, titolo, tipo, anno\
           }\
@@ -69,8 +69,8 @@ var settings = {
       }\
     }',
 
-    titles: 'query($titolo: String, $attore: String, $doppiatore: String, $tipo: String, $user: Int) {\
-	     titles(where: {titolo: $titolo, attore: $attore, doppiatore: $doppiatore, tipo: $tipo, user: $user}) {\
+    titles: 'query($titolo: String, $attore: String, $doppiatore: String, $direttore: String, $assistente: String, $tipo: String, $user: Int) {\
+	     titles(where: {titolo: $titolo, attore: $attore, doppiatore: $doppiatore, direttore: $direttore, assistente: $assistente, tipo: $tipo, user: $user}) {\
          id, titolo, originale, tipo, anno\
        }\
     }',
@@ -120,14 +120,14 @@ var settings = {
       }\
     }',
 
-    createDubber: 'mutation($nome: String!, $cognome: String!, $sesso: String!, $telefono: String, $anno: Int, $luogo: String, $note: String, $email: String, $madrelingua: String, $accentistranieri: Int, $accentiregionali: Int, $foto: String, $audio: String) {\
-      createDubber(input: {nome: $nome, cognome: $cognome, sesso: $sesso, telefono: $telefono, anno: $anno, luogo: $luogo, note: $note, email: $email, madrelingua: $madrelingua, accentistranieri: $accentistranieri, accentiregionali: $accentiregionali, foto: $foto, audio: $audio}) {\
+    createDubber: 'mutation($nome: String!, $cognome: String!, $sesso: String!, $telefono: String, $anno: Int, $luogo: String, $cat: String, $note: String, $email: String, $madrelingua: String, $accentistranieri: Int, $accentiregionali: Int, $foto: String, $audio: String) {\
+      createDubber(input: {nome: $nome, cognome: $cognome, sesso: $sesso, telefono: $telefono, anno: $anno, luogo: $luogo, cat: $cat, note: $note, email: $email, madrelingua: $madrelingua, accentistranieri: $accentistranieri, accentiregionali: $accentiregionali, foto: $foto, audio: $audio}) {\
         id\
       }\
     }',
 
-    updateDubber: 'mutation($id: ID!, $nome: String!, $cognome: String!, $sesso: String!, $telefono: String, $anno: Int, $luogo: String, $note: String, $email: String, $madrelingua: String, $accentistranieri: Int, $accentiregionali: Int, $foto: String, $audio: String) {\
-      updateDubber(id: $id, input: {nome: $nome, cognome: $cognome, sesso: $sesso, telefono: $telefono, anno: $anno, luogo: $luogo, note: $note, email: $email, madrelingua: $madrelingua, accentistranieri: $accentistranieri, accentiregionali: $accentiregionali, foto: $foto, audio: $audio})\
+    updateDubber: 'mutation($id: ID!, $nome: String!, $cognome: String!, $sesso: String!, $telefono: String, $anno: Int, $luogo: String, $cat: String, $note: String, $email: String, $madrelingua: String, $accentistranieri: Int, $accentiregionali: Int, $foto: String, $audio: String) {\
+      updateDubber(id: $id, input: {nome: $nome, cognome: $cognome, sesso: $sesso, telefono: $telefono, anno: $anno, luogo: $luogo, cat: $cat, note: $note, email: $email, madrelingua: $madrelingua, accentistranieri: $accentistranieri, accentiregionali: $accentiregionali, foto: $foto, audio: $audio})\
     }',
 
     createDubbernote: 'mutation($voce: String, $ruolo: String, $etavoce: String, $cartoni: Int, $canta: Int, $piuvoci: Int, $teatro: Int, $sync: Int, $giudizio: Int, $note: String, $id_dubber: ID!, $id_user: ID!) {\

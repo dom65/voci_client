@@ -4,7 +4,12 @@ export default function(model, actions) {
   return {
     canSubmit: function() {
       console.log("Can Submit Title");
-      return model.searchTitle.user && model.searchTitle.user != "0" || model.searchTitle.titolo && model.searchTitle.titolo != "" || model.searchTitle.attore && model.searchTitle.attore !== "" || model.searchTitle.doppiatore && model.searchTitle.doppiatore != ""
+      return model.searchTitle.user && model.searchTitle.user != "0" ||
+        model.searchTitle.titolo && model.searchTitle.titolo != "" ||
+        model.searchTitle.attore && model.searchTitle.attore !== "" ||
+        model.searchTitle.doppiatore && model.searchTitle.doppiatore != "" ||
+        model.searchTitle.direttore && model.searchTitle.direttore != "" ||
+        model.searchTitle.assistente && model.searchTitle.assistente != ""
     },
     view: function() {
       return m("form", {
@@ -26,6 +31,7 @@ export default function(model, actions) {
         ) : null,
 
         m(".field", [
+          m("label.label.is-small", "Titolo"),
           m(".control",
             m("input.input.is-small[placeholder='Titolo'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleTitle),
@@ -35,6 +41,7 @@ export default function(model, actions) {
         ]),
 
         m(".field", [
+          m("label.label.is-small", "Attore originale"),
           m(".control",
             m("input.input.is-small[placeholder='Attore originale'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleActor),
@@ -43,6 +50,7 @@ export default function(model, actions) {
           )
         ]),
         m(".field", [
+          m("label.label.is-small", "Doppiatore"),
           m(".control",
             m("input.input.is-small[placeholder='Doppiatore'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleDubber),
@@ -51,6 +59,25 @@ export default function(model, actions) {
           )
         ]),
         m(".field", [
+          m("label.label.is-small", "Direttore"),
+          m(".control",
+            m("input.input.is-small[placeholder='Doppiatore'][type='text']", {
+              oninput: m.withAttr("value", model.setSearchTitleDirector),
+              value: model.searchTitle.direttore
+            })
+          )
+        ]),
+        m(".field", [
+          m("label.label.is-small", "Assistente"),
+          m(".control",
+            m("input.input.is-small[placeholder='Doppiatore'][type='text']", {
+              oninput: m.withAttr("value", model.setSearchTitleAssistant),
+              value: model.searchTitle.assistente
+            })
+          )
+        ]),
+        m(".field", [
+          //m("label.label.is-small", "Genere"),
           m(".control",
             m(".select.is-small",
               m("select", {

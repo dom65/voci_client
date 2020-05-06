@@ -1,8 +1,8 @@
 export default createModel
 
 var settings = undefined;
-var searchDubber = {deno: undefined, sesso: undefined, anno: undefined, user: undefined, tags: {}};
-var searchTitle = {titolo: undefined, attore: undefined, doppiatore: undefined, tipo: undefined, user: undefined};
+var searchDubber = {deno: undefined, sesso: undefined, anno: undefined, cat: undefined, user: undefined, tags: {}};
+var searchTitle = {titolo: undefined, attore: undefined, doppiatore: undefined, direttore: undefined, assistente: undefined, tipo: undefined, user: undefined};
 var user = {email: undefined, password: undefined};
 
 function createModel(s) {
@@ -25,7 +25,7 @@ function createModel(s) {
     setPassword: setPassword,
 
     dubbers: [],
-    dubber: {nome: "", cognome: "", sesso: "", foto: "", casts: []},
+    dubber: {nome: "", cognome: "", sesso: "", foto: "", casts: [], titles: []},
     dubberedit: {},
     dubbernoteedit: {},
     progressUploadDubberImage: 0,
@@ -42,11 +42,14 @@ function createModel(s) {
     setSearchDubberDeno: setSearchDubberDeno,
     setSearchDubberSesso: setSearchDubberSesso,
     setSearchDubberAnno: setSearchDubberAnno,
+    setSearchDubberCat: setSearchDubberCat,
     setSearchDubberUser: setSearchDubberUser,
 
     setSearchTitleTitle: setSearchTitleTitle,
     setSearchTitleActor: setSearchTitleActor,
     setSearchTitleDubber: setSearchTitleDubber,
+    setSearchTitleDirector: setSearchTitleDirector,
+    setSearchTitleAssistant: setSearchTitleAssistant,
     setSearchTitleTipo: setSearchTitleTipo,
     setSearchTitleUser: setSearchTitleUser,
 
@@ -80,6 +83,10 @@ function createModel(s) {
     searchDubber.anno = _anno;
   }
 
+  function setSearchDubberCat(_cat) {
+    searchDubber.cat = _cat;
+  }
+
   function setSearchDubberUser(_user) {
     searchDubber.user = _user;
   }
@@ -94,6 +101,14 @@ function createModel(s) {
 
   function setSearchTitleDubber(_doppiatore) {
     searchTitle.doppiatore = _doppiatore;
+  }
+
+  function setSearchTitleDirector(_direttore) {
+    searchTitle.direttore = _direttore;
+  }
+
+  function setSearchTitleAssistant(_assistente) {
+    searchTitle.assistente = _assistente;
   }
 
   function setSearchTitleTipo(_tipo) {

@@ -75,7 +75,8 @@ function createActions(sets, mdl, api) {
         nome: "",
         cognome: "",
         foto: "",
-        casts: []
+        casts: [],
+        titles: []
       };
       model.dubberedit = {};
       model.dubbernoteedit = {};
@@ -151,6 +152,7 @@ function createActions(sets, mdl, api) {
   }
 
   function submitLogin(e) {
+    console.log("SubmitLoginCalled");
     if (e) {
       e.preventDefault();
     }
@@ -167,6 +169,7 @@ function createActions(sets, mdl, api) {
   }
 
   function submitGuestLogin(e) {
+    console.log("SubmitGuestLoginCalled");
     if (e) {
       e.preventDefault();
     }
@@ -182,11 +185,13 @@ function createActions(sets, mdl, api) {
       })
   }
 
-  function dubbers(deno, sesso, anno, user, tags) {
-    return dataApi.dubbers(deno, sesso, anno, user, tags)
+  function dubbers(deno, sesso, anno, cat, user, tags) {
+    return dataApi.dubbers(deno, sesso, anno, cat, user, tags)
       .then(function(res) {
         if (!res.errors) {
-          model.dubbers = res.data.dubbers;
+          model.dubbers = res.data.dubbers.sort(function(d1, d2) {
+            return d1.cognome > d2.cognome
+          });
         }
         model.loading = false;
       })
@@ -197,17 +202,30 @@ function createActions(sets, mdl, api) {
   }
 
   function dubber(id) {
+    var deno;
     return dataApi.dubber(id)
-      .then(function(res) {
-        if (!res.errors) {
-          model.dubber = res.data.dubber;
-        }
-        model.loading = false;
-      })
-      .catch(function(err) {
-        console.error(err)
-        model.loading = false;
-      })
+    .then(function(res) {
+      model.dubber = res.data.dubber;
+      // search as direttore
+      deno = model.dubber.nome + ' ' + model.dubber.cognome;
+      return dataApi.titles("", "", "", deno)
+    })
+    .then(function(res) {
+      model.dubber.titles = res.data.titles;
+      return dataApi.titles("", "", "", "", deno)
+    })
+    .then(function(res) {
+      console.log(res)
+      model.dubber.titles.push.apply(model.dubber.titles, res.data.titles);
+      model.dubber.titles = model.dubber.titles.sort(function(a, b) {
+        return b.anno - a.anno
+      });
+      model.loading = false;
+    })
+    .catch(function(err) {
+      console.error(err)
+      model.loading = false;
+    })
   }
 
   function dubberedit(id) {
@@ -241,8 +259,8 @@ function createActions(sets, mdl, api) {
       })
   }
 
-  function titles(titolo, attore, doppiatore, tipo, user) {
-    return dataApi.titles(titolo, attore, doppiatore, tipo, user)
+  function titles(titolo, attore, doppiatore, direttore, assistente, tipo, user) {
+    return dataApi.titles(titolo, attore, doppiatore, direttore, assistente, tipo, user)
       .then(function(res) {
         if (!res.errors) {
           model.titles = res.data.titles.sort(function(a, b) {
@@ -341,7 +359,7 @@ function createActions(sets, mdl, api) {
     model.loading = true;
     m.redraw();
     console.log(model.searchDubber);
-    return dubbers(model.searchDubber.deno, model.searchDubber.sesso, model.searchDubber.anno, model.searchDubber.user, model.searchDubber.tags);
+    return dubbers(model.searchDubber.deno, model.searchDubber.sesso, model.searchDubber.anno, model.searchDubber.cat, model.searchDubber.user, model.searchDubber.tags);
   }
 
   function clearSearchDubber(e) {
@@ -351,6 +369,7 @@ function createActions(sets, mdl, api) {
     model.setSearchDubberDeno('');
     model.setSearchDubberSesso('');
     model.setSearchDubberAnno('0');
+    model.setSearchDubberCat('');
     model.setSearchDubberUser(0);
     model.searchDubber.tags = {};
   }
@@ -362,7 +381,7 @@ function createActions(sets, mdl, api) {
     model.loading = true;
     m.redraw();
     console.log(model.searchTitle);
-    return titles(model.searchTitle.titolo, model.searchTitle.attore, model.searchTitle.doppiatore, model.searchTitle.tipo, model.searchTitle.user);
+    return titles(model.searchTitle.titolo, model.searchTitle.attore, model.searchTitle.doppiatore, model.searchTitle.direttore, model.searchTitle.assistente, model.searchTitle.tipo, model.searchTitle.user);
   }
 
   function clearSearchTitle(e) {
@@ -372,6 +391,8 @@ function createActions(sets, mdl, api) {
     model.setSearchTitleActor('');
     model.setSearchTitleTitle('');
     model.setSearchTitleDubber('');
+    model.setSearchTitleDirector('');
+    model.setSearchTitleAssistant('');
     model.setSearchTitleTipo('');
     model.setSearchTitleUser(0);
   }

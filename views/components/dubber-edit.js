@@ -216,7 +216,24 @@ export default function(model, actions) {
                   )
                 )
               ]),
-*/
+              */
+
+              m(".field.is-horizontal", [
+                m(".field-label.is-normal",
+                  m("label.label", "Categoria")
+                ),
+                m(".field-body",
+                  m(".field",
+                    m(".control",
+                      m("input.input[placeholder='Categoria'][type='text']", {
+                        oninput: m.withAttr("value", function (v) {d.cat = v}),
+                        value: d.cat
+                      })
+                    )
+                  )
+                )
+              ]),
+
               m(".field.is-horizontal", [
                 m(".field-label.is-normal",
                   m("label.label", "Note")

@@ -4,7 +4,7 @@ export default function(model, actions) {
   return {
     canSubmit: function() {
       console.log("Can Submit Dubber");
-      return model.searchDubber.user && model.searchDubber.user != "0" || model.searchDubber.sesso && model.searchDubber.sesso !== "" || model.searchDubber.deno && model.searchDubber.deno != ""
+      return model.searchDubber.user && model.searchDubber.user != "0" || model.searchDubber.cat && model.searchDubber.cat !== "" || model.searchDubber.sesso && model.searchDubber.sesso !== "" || model.searchDubber.deno && model.searchDubber.deno != ""
     },
     view: function() {
       return m("form", {
@@ -133,6 +133,24 @@ export default function(model, actions) {
           )
         ) : null,
 */
+
+        m(".field",
+          m(".control",
+            m(".select.is-small",
+              m("select", {
+                onchange: m.withAttr("value", model.setSearchDubberCat),
+                value: model.searchDubber.cat
+              }, [
+                m("option", { value: "" }, "Categoria"),
+                m("option", { value: "Direttori" }, "Direttori"),
+                m("option", { value: "Assistenti" }, "Assistenti"),
+                m("option", { value: "Allievi" }, "Allievi"),
+                m("option", { value: "Bambini e ragazzi" }, "Bambini e ragazzi")
+              ])
+            )
+          )
+        ),
+
         model.searchDubber.user != 1 ? m(".field",
           m(".control",
             m(".select.is-small",
