@@ -1,17 +1,35 @@
 import m from 'mithril';
-import brand_img from '../../image/voci.png'
+import brand_img from '../../image/logo_anad.png'
 
 export default function(model, actions) {
   return {
     view: function() {
 
-      return m("nav.navbar.is-primary[aria-label='main navigation'][role='navigation']", [
+      return m("nav.navbar.is-primary[aria-label='main navigation'][role='navigation']", {
+        style: 'height: 3.50rem;',
+      }, [
 
         m(".navbar-brand", [
+
           m(".navbar-item",
-            //m("img[alt='Voci'][height='29'][width='112']", {src: brand_img})
-            m(".title.has-text-white", "VOCIT"),
+
+            m("a.has-text-white", {
+                href: '/dubbers',
+                oncreate: m.route.link,
+              }, [
+              m("img[alt='ANAD']", {
+                src: brand_img,
+              }),
+              m("span.is-size-4.has-text-weight-bold", m.trust(" &nbsp;VocIt")),
+            ]),
+
           ),
+
+
+          //m(".navbar-item",
+            //m("img[alt='Voci'][height='29'][width='112']", {src: brand_img})
+          //  m(".title.has-text-white", "VOCIT"),
+          //),
           m('a.navbar-burger', {
             class: model.mainMenuToggle ? 'is-active' : '',
             onclick: actions.toggleMainMenu

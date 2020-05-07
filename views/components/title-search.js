@@ -61,7 +61,7 @@ export default function(model, actions) {
         m(".field", [
           m("label.label.is-small", "Direttore"),
           m(".control",
-            m("input.input.is-small[placeholder='Doppiatore'][type='text']", {
+            m("input.input.is-small[placeholder='Direttore'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleDirector),
               value: model.searchTitle.direttore
             })
@@ -70,7 +70,7 @@ export default function(model, actions) {
         m(".field", [
           m("label.label.is-small", "Assistente"),
           m(".control",
-            m("input.input.is-small[placeholder='Doppiatore'][type='text']", {
+            m("input.input.is-small[placeholder='Assistente'][type='text']", {
               oninput: m.withAttr("value", model.setSearchTitleAssistant),
               value: model.searchTitle.assistente
             })
@@ -84,7 +84,7 @@ export default function(model, actions) {
                 onchange: m.withAttr("value", model.setSearchTitleTipo),
                 value: model.searchTitle.tipo
               }, [
-                m("option", {value: ""}, "Selezione Genere ..."),
+                m("option", {value: ""}, "Genere ..."),
                 m("option", {value: "FILM"}, "FILM"),
                 m("option", {value: "TELEFILM"}, "TELEFILM"),
                 m("option", {value: "VIDEOGAME"}, "VIDEOGAME")

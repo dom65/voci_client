@@ -16,6 +16,6 @@
   "scripts": {
     "start": "parcel index.html",
     "watch": "parcel watch index.html",
-    "dist": "parcel build index.html --out-dir ../graphql_server/public --public-url ./"
+    "dist": "rm -rf ../graphql_server/public/* && parcel build index.html --out-dir ../graphql_server/public --public-url ./"
   }
 }
