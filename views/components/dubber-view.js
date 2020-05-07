@@ -42,10 +42,13 @@ export default function(model, actions) {
 
           m(".content", [
             d.audio ? m("audio", {
-              controls: "controls",
-              src: model.mediaOptions.url + d.audio,
-              type: "audio/mp3"
-            }) : null,
+                controls: "controls",
+              },
+              m("source", {
+                src: model.mediaOptions.url + d.audio,
+                type: "audio/mp3",
+              }, "")
+            ) : null,
             m("p"),
             model.login.isadmin == 1 || model.login.email == d.email ?
             m(".level.is-mobile", [

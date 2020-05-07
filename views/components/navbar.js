@@ -20,7 +20,7 @@ export default function(model, actions) {
               m("img[alt='ANAD']", {
                 src: brand_img,
               }),
-              m("span.is-size-4.has-text-weight-bold", m.trust(" &nbsp;VocIt")),
+              m("span.is-size-4.has-text-weight-bold", m.trust(" &nbsp;VocIT")),
             ]),
 
           ),
