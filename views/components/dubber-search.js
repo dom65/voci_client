@@ -132,16 +132,33 @@ export default function(model, actions) {
             ])
           )
         ) : null,
-*/
+        */
 
-        m(".field",
+        model.searchDubber.user != 1 && model.login.isadmin == 1
+        ? m(".field", [
+          m("label.label.is-small", "Associazione"),
+          m(".control",
+            m(".select.is-small",
+              m("select", {
+                onchange: m.withAttr("value", model.setSearchDubberAssociazione),
+                value: model.searchDubber.associazione
+              }, [
+                m("option", { value: "" }, ""),
+                m("option", { value: "ANAD -" }, "ANAD"),
+              ])
+            )
+          )
+        ]) : null,
+
+        model.searchDubber.user != 1 ? m(".field", [
+          m("label.label.is-small", "Categoria"),
           m(".control",
             m(".select.is-small",
               m("select", {
                 onchange: m.withAttr("value", model.setSearchDubberCat),
                 value: model.searchDubber.cat
               }, [
-                m("option", { value: "" }, "Categoria"),
+                m("option", { value: "" }, ""),
                 m("option", { value: "Direttori" }, "Direttori"),
                 m("option", { value: "Assistenti" }, "Assistenti"),
                 m("option", { value: "Allievi" }, "Allievi"),
@@ -149,9 +166,10 @@ export default function(model, actions) {
               ])
             )
           )
-        ),
+        ]) : null,
 
-        model.searchDubber.user != 1 ? m(".field",
+        model.searchDubber.user != 1 ? m(".field", [
+          m("label.label.is-small", "Sesso"),
           m(".control",
             m(".select.is-small",
               m("select", {
@@ -160,7 +178,7 @@ export default function(model, actions) {
               }, [
                 m("option", {
                   value: ""
-                }, "Sesso"),
+                }, ""),
                 m("option", {
                   value: "M"
                 }, "Maschio"),
@@ -170,7 +188,7 @@ export default function(model, actions) {
               ])
             )
           )
-        ) : null,
+        ]) : null,
 /*
         model.searchDubber.user != 1 ? m(".field", [
           m(".control",
@@ -206,8 +224,9 @@ export default function(model, actions) {
         ]) : null,
 */
         model.searchDubber.user != 1 ? m(".field", [
+          m("label.label.is-small", "Nominativo"),
           m(".control",
-            m("input.input.is-small[placeholder='Cognome Attore'][type='text']", {
+            m("input.input.is-small[placeholder='Nominativo'][type='text']", {
               oninput: m.withAttr("value", model.setSearchDubberDeno),
               value: model.searchDubber.deno
             })

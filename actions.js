@@ -185,8 +185,8 @@ function createActions(sets, mdl, api) {
       })
   }
 
-  function dubbers(deno, sesso, anno, cat, user, tags) {
-    return dataApi.dubbers(deno, sesso, anno, cat, user, tags)
+  function dubbers(deno, sesso, anno, associazione, cat, user, tags) {
+    return dataApi.dubbers(deno, sesso, anno, associazione, cat, user, tags)
       .then(function(res) {
         if (!res.errors) {
           model.dubbers = res.data.dubbers.sort(function(d1, d2) {
@@ -359,7 +359,7 @@ function createActions(sets, mdl, api) {
     model.loading = true;
     m.redraw();
     console.log(model.searchDubber);
-    return dubbers(model.searchDubber.deno, model.searchDubber.sesso, model.searchDubber.anno, model.searchDubber.cat, model.searchDubber.user, model.searchDubber.tags);
+    return dubbers(model.searchDubber.deno, model.searchDubber.sesso, model.searchDubber.anno, model.searchDubber.associazione, model.searchDubber.cat, model.searchDubber.user, model.searchDubber.tags);
   }
 
   function clearSearchDubber(e) {
@@ -369,6 +369,7 @@ function createActions(sets, mdl, api) {
     model.setSearchDubberDeno('');
     model.setSearchDubberSesso('');
     model.setSearchDubberAnno('0');
+    model.setSearchDubberAssociazione('');
     model.setSearchDubberCat('');
     model.setSearchDubberUser(0);
     model.searchDubber.tags = {};

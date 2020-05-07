@@ -77,14 +77,14 @@ export default function(model, actions) {
           )
         ]),
         m(".field", [
-          //m("label.label.is-small", "Genere"),
+          m("label.label.is-small", "Genere"),
           m(".control",
             m(".select.is-small",
               m("select", {
                 onchange: m.withAttr("value", model.setSearchTitleTipo),
                 value: model.searchTitle.tipo
               }, [
-                m("option", {value: ""}, "Genere ..."),
+                m("option", {value: ""}, ""),
                 m("option", {value: "FILM"}, "FILM"),
                 m("option", {value: "TELEFILM"}, "TELEFILM"),
                 m("option", {value: "VIDEOGAME"}, "VIDEOGAME")

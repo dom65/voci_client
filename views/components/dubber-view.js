@@ -34,6 +34,7 @@ export default function(model, actions) {
               //m("p", [m("strong", "Madrelingua: "), (d.madrelingua ? d.madrelingua : "")]),
               //m("p", [m("strong", "Accenti stranieri: "), (d.accentistranieri == 1 ? "Si" : d.accentistranieri == 0 ? "No" : "")]),
               //m("p", [m("strong", "Accenti regionali: "), (d.accentiregionali == 1 ? "Si" : d.accentiregionali == 0 ? "No" : "")]),
+              model.login.isadmin == 1 || model.login.email == d.email ? m("p", [m("strong", "Categoria: "), (d.cat ? d.cat : "")]) : null,
               m("p", [m("strong", "Note: "), (d.note ? d.note : "")]),
               m("hr"),
             ])

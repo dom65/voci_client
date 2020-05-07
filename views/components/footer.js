@@ -12,7 +12,7 @@ export default function(model, actions) {
                 "VOCIT"
               ),
               " by ",
-              m("a[href='mailto:info@kodedonda.it']",
+              m("a[href='https://kodedonda.it']",
                 "Kodedonda"
               ),
               ". The source code is licensed",

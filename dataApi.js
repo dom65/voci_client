@@ -42,7 +42,9 @@ function createDataApi(s) {
     });
   }
 
-  function dubbers(deno, sesso, anno, cat, user, tags) {
+  function dubbers(deno, sesso, anno, associazione, cat, user, tags) {
+    // Manage associazione and cat
+    cat = associazione ? associazione + '%' + cat : cat;
     return client.post(settings.graphql_queries.dubbers, {
       "deno": deno,
       "sesso": sesso,

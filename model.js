@@ -1,7 +1,7 @@
 export default createModel
 
 var settings = undefined;
-var searchDubber = {deno: undefined, sesso: undefined, anno: undefined, cat: undefined, user: undefined, tags: {}};
+var searchDubber = {deno: undefined, sesso: undefined, anno: undefined, associazione: undefined, cat: undefined, user: undefined, tags: {}};
 var searchTitle = {titolo: undefined, attore: undefined, doppiatore: undefined, direttore: undefined, assistente: undefined, tipo: undefined, user: undefined};
 var user = {email: undefined, password: undefined};
 
@@ -42,6 +42,7 @@ function createModel(s) {
     setSearchDubberDeno: setSearchDubberDeno,
     setSearchDubberSesso: setSearchDubberSesso,
     setSearchDubberAnno: setSearchDubberAnno,
+    setSearchDubberAssociazione: setSearchDubberAssociazione,
     setSearchDubberCat: setSearchDubberCat,
     setSearchDubberUser: setSearchDubberUser,
 
@@ -81,6 +82,10 @@ function createModel(s) {
 
   function setSearchDubberAnno(_anno) {
     searchDubber.anno = _anno;
+  }
+
+  function setSearchDubberAssociazione(_asso) {
+    searchDubber.associazione = _asso;
   }
 
   function setSearchDubberCat(_cat) {
