@@ -43,7 +43,7 @@ export default function(model, actions) {
               ),
               m("tbody",
                 d.titles.sort(function(a, b) {
-                  return b.anno - a.anno
+                  return b.anno > a.anno ? 1 : -1
                 }).map(function(row) {
                   return m("tr", [
                     m("td", [
@@ -71,13 +71,13 @@ export default function(model, actions) {
             m("h4.subtitle.is-4", "Doppiaggi"),
             m("table.table.is-striped.is-narrow.is-fullwidth.is-size-7", [
               m("thead",
-                m("tr", ["personaggio", "attore", "titolo"].map(function(col) {
+                m("tr", ["personaggio", "attore", "titolo", "anno"].map(function(col) {
                   return m("th", col);
                 }))
               ),
               m("tbody",
                 d.casts.sort(function(a, b) {
-                  return b.title.anno - a.title.anno
+                  return b.title.anno > a.title.anno ? 1 : -1
                 }).map(function(row) {
                   return m("tr", [
                     m("td", row.personaggio ? row.personaggio.toLowerCase() : ""),
@@ -97,7 +97,7 @@ export default function(model, actions) {
                         row.title.titolo
                       )
                     ]),
-                    //m("td", row.title.anno),
+                    m("td", row.title.anno ? row.title.anno : ""),
                     //m("td", row.title.tipo),
 
                   ])

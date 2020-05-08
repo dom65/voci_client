@@ -190,7 +190,7 @@ function createActions(sets, mdl, api) {
       .then(function(res) {
         if (!res.errors) {
           model.dubbers = res.data.dubbers.sort(function(d1, d2) {
-            return d1.cognome > d2.cognome
+            return d1.cognome > d2.cognome ? 1 : -1
           });
         }
         model.loading = false;
@@ -218,7 +218,7 @@ function createActions(sets, mdl, api) {
       console.log(res)
       model.dubber.titles.push.apply(model.dubber.titles, res.data.titles);
       model.dubber.titles = model.dubber.titles.sort(function(a, b) {
-        return b.anno - a.anno
+        return b.anno > a.anno ? 1 : -1
       });
       model.loading = false;
     })
@@ -264,7 +264,7 @@ function createActions(sets, mdl, api) {
       .then(function(res) {
         if (!res.errors) {
           model.titles = res.data.titles.sort(function(a, b) {
-            return b.anno - a.anno
+            return b.anno > a.anno ? 1 : -1
           });
         }
         model.loading = false;
@@ -309,7 +309,7 @@ function createActions(sets, mdl, api) {
       .then(function(res) {
         if (!res.errors) {
           model.casts = res.data.casts.sort(function(a, b) {
-            return b.title.anno - a.title.anno
+            return b.title.anno > a.title.anno ? 1 : -1
           });
         }
         return dataApi.cast(id)
@@ -333,7 +333,7 @@ function createActions(sets, mdl, api) {
       .then(function(res) {
         if (!res.errors) {
           model.casts = res.data.casts.sort(function(a, b) {
-            return b.title.anno - a.title.anno
+            return b.title.anno > a.title.anno ? 1 : -1
           });
         }
         return dataApi.titlenote(id)
