@@ -189,9 +189,10 @@ function createActions(sets, mdl, api) {
     return dataApi.dubbers(deno, sesso, anno, associazione, cat, user, tags)
       .then(function(res) {
         if (!res.errors) {
-          model.dubbers = res.data.dubbers.sort(function(d1, d2) {
-            return d1.cognome > d2.cognome ? 1 : -1
-          });
+          //model.dubbers = res.data.dubbers.sort(function(d1, d2) {
+          //  return d1.cognome > d2.cognome ? 1 : -1
+          //});
+          model.dubbers = res.data.dubbers;
         }
         model.loading = false;
       })
